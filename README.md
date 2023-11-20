@@ -2,16 +2,16 @@
 
 Aplikasi Tugas Akhir PBP kelompok D02
 
-Lets go!!
+Lets go!! 💨
 
-Daftar nama anggota kelompok
-1. Venedict Chen - 2206024436
-2. Sefriano Edsel Jieftara Djie - 2206818966
-3. Kenichi Komala - 2206081452
-4. Shabhi Aliyya Siyauqi Dzakia - 2206083741
-5. Sabina Maritza Moenzil - 2206027583
+🏛️ Daftar nama anggota kelompok
+1. Venedict Chen - 2206024436 🕵️‍♂️
+2. Sefriano Edsel Jieftara Djie - 2206818966 🕵️‍♂️
+3. Kenichi Komala - 2206081452 🕵️‍♂️
+4. Shabhi Aliyya Siyauqi Dzakia - 2206083741 🕵️‍♀️
+5. Sabina Maritza Moenzil - 2206027583 🕵️‍♀️
 
-Deskripsi aplikasi (nama dan fungsi aplikasi)
+📱 Deskripsi aplikasi (nama dan fungsi aplikasi)
 Readify
 Aplikasi dimana user bisa membuat review terhadap buku-buku yang mereka suka dan memasukkan buku-buku yang mereka sukai ke dalam liked-list mereka yang bisa dilihat oleh orang lain
 
