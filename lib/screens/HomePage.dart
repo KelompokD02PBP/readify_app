@@ -5,11 +5,23 @@ import 'package:readify_app/models/Book.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
-class MyHomePage extends StatelessWidget {
-    MyHomePage({Key? key}) : super(key: key);
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
-    Future<List<Book>> fetchProduct() async {
+class _MyHomePageState extends State<MyHomePage> {
+
+  var _books;
+  String? _searching;
+
+  _MyHomePageState(){
+    _books=fetchProduct();
+  }
+
+  Future<List<Book>> fetchProduct() async {
       var url = Uri.parse('http://127.0.0.1:8000/katalog/get-books-json');
       var response = await http.get(url, headers: {"Content-Type": "application/json"});
 
@@ -26,9 +38,9 @@ class MyHomePage extends StatelessWidget {
       return list_product;
     }
 
-    @override
-    Widget build(BuildContext context)  {
-      return Scaffold(
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
           appBar: AppBar(
             title: const Text(
               'Readify',
@@ -48,32 +60,52 @@ class MyHomePage extends StatelessWidget {
                 height: 70,
                 child : Row(
                   children:[
-                    const SizedBox(
+                    SizedBox(
                       width: 500,
                       height: 100,
                       child: 
                       TextField(
                       autocorrect: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Lorem Ipsum",
                         labelText: "Search"
                       ),
+                      onChanged: (String? values){
+                        setState(() {
+                        _searching = values!;
+                      });
+                      },
                     )
                     ),
                     Flexible(
-              child: ElevatedButton(onPressed: (){
+                      child: ElevatedButton(
+                            onPressed: () async{
+                              print(_searching.toString());
+                              var searched_books = await http.get(Uri.parse('http://127.0.0.1:8000/katalog/search-books-json/'+_searching.toString()),headers: {"Content-Type": "application/json"});
+                              var data = jsonDecode(utf8.decode(searched_books.bodyBytes));
 
-                    }, child: const Text("Search")) 
-              ),
-                    
+                              List<Book> list_product = [];
+                              for (var d in data) {
+                                  if (d != null) {
+                                      list_product.add(Book.fromJson(d));
+                                  }
+                              }
+                              setState(() {
+                              _books = Future<List<Book>>.value(list_product);
+                              _searching="";
+                              });
+                            },
+                            child: const Text("Search")) 
+                    ),   
                   ]
               ),
               )
             ),
             Expanded(child: 
               FutureBuilder(
-              future: fetchProduct(),
+              future: _books,
               builder: (context, AsyncSnapshot snapshot){
+                      print(_books);
                       if (snapshot.data == null) {
                           return const Center(child: CircularProgressIndicator());
                       } else {
@@ -105,17 +137,9 @@ class MyHomePage extends StatelessWidget {
           ]
         )
       );
-    }
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+  }
 }
+
 
 class CustomGridDelegate extends SliverGridDelegate {
   CustomGridDelegate({required this.dimension});
