@@ -82,15 +82,19 @@ class _MyHomePageState extends State<MyHomePage> {
         Column(
           children : [
             Center(
-              widthFactor: 1.5,
+              widthFactor: 1,
               child:
               SizedBox(
                 width: 800,
-                height: 70,
-                child : Row(
+                height: 150,
+                child : Wrap(
+                  runSpacing:1.0,
+                  spacing: 8.0,
+                  // alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children:[
-                    Container(
-                      width: 500,
+                    SizedBox(
+                      width: 600,
                       height: 100,
                       child: 
                       TextField(
@@ -106,11 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                     )
                     ),
-                    Flexible(
-                      child: 
-                        Row(
-                          children: [
-                            ElevatedButton(
+                    ElevatedButton(
                                 onPressed: () async{
                                   print(_searching.toString());
 
@@ -132,32 +132,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                 },
                                 child: const Text("Search")
                             ),
-                            // ElevatedButton(
-                            //     onPressed: () async{
-                            //       var searchedBooks = await http.get(Uri.parse('http://127.0.0.1:8000/katalog/search-books-json/$_searching'),headers: {"Content-Type": "application/json"});
-                            //       var data = jsonDecode(utf8.decode(searchedBooks.bodyBytes));
-
-                            //       List<Book> listProduct = [];
-                            //       for (var d in data) {
-                            //           if (d != null) {
-                            //               listProduct.add(Book.fromJson(d));
-                            //           }
-                            //       }
-                            //       setState(() {
-                            //       _books = Future<List<Book>>.value(listProduct);
-                            //       _searching="";
-                            //       });
-                            //     }
-                            //     , child: const Icon(Icons.sort)
-                            // )
+                        Row(
+                          children: [
+                            
                             DropdownButton(
-                              items: [
-                                DropdownMenuItem<String>(child: Text("A-Z"), value:"1"), 
-                                DropdownMenuItem<String>(child: Text("Z-A"), value:"2"),
-                                DropdownMenuItem<String>(child: Text("First Published"), value:"3"),
-                                DropdownMenuItem<String>(child: Text("Last Published"), value:"4"),
-                                DropdownMenuItem<String>(child: Text("Before 2000"), value: "5",),
-                                DropdownMenuItem<String>(child: Text("After 2000"), value: "6",),
+                              items: const [
+                                DropdownMenuItem<String>(value:"1", child: Text("A-Z")), 
+                                DropdownMenuItem<String>(value:"2", child: Text("Z-A")),
+                                DropdownMenuItem<String>(value:"3", child: Text("First Published")),
+                                DropdownMenuItem<String>(value:"4", child: Text("Last Published")),
+                                DropdownMenuItem<String>(value: "5",child: Text("Before 2000")),
+                                DropdownMenuItem<String>(value: "6",child: Text("After 2000")),
                               ],
                               onChanged: dropdownCallback,
                               value:_dropdownValue,
@@ -166,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             )
                           ]
                         )
-                    ),
+
                   ]
               ),
               )
