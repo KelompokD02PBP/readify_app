@@ -15,10 +15,39 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   var _books;
+  var _dropdownValue;
   String? _searching;
 
   _MyHomePageState(){
     _books=fetchProduct();
+  }
+
+  void dropdownCallback(Object? selectedValue) async{
+    if(selectedValue is String){
+      
+      final response = await http.post(
+        Uri.parse('http://127.0.0.1:8000/katalog/sort-books-json/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'order_by': selectedValue,
+        }),
+      );
+
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+      List<Book> listProduct = [];
+      for (var d in data) {
+          if (d != null) {
+              listProduct.add(Book.fromJson(d));
+          }
+      }
+      setState(() {
+        _books = Future<List<Book>>.value(listProduct);
+        _dropdownValue = selectedValue;
+      });
+    }
   }
 
   Future<List<Book>> fetchProduct() async {
@@ -29,13 +58,13 @@ class _MyHomePageState extends State<MyHomePage> {
       var data = jsonDecode(utf8.decode(response.bodyBytes));
 
       // melakukan konversi data json menjadi object Product
-      List<Book> list_product = [];
+      List<Book> listProduct = [];
       for (var d in data) {
           if (d != null) {
-              list_product.add(Book.fromJson(d));
+              listProduct.add(Book.fromJson(d));
           }
       }
-      return list_product;
+      return listProduct;
     }
 
   @override
@@ -56,11 +85,11 @@ class _MyHomePageState extends State<MyHomePage> {
               widthFactor: 1.5,
               child:
               SizedBox(
-                width: 700,
+                width: 800,
                 height: 70,
                 child : Row(
                   children:[
-                    SizedBox(
+                    Container(
                       width: 500,
                       height: 100,
                       child: 
@@ -78,25 +107,66 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                     ),
                     Flexible(
-                      child: ElevatedButton(
-                            onPressed: () async{
-                              print(_searching.toString());
-                              var searched_books = await http.get(Uri.parse('http://127.0.0.1:8000/katalog/search-books-json/'+_searching.toString()),headers: {"Content-Type": "application/json"});
-                              var data = jsonDecode(utf8.decode(searched_books.bodyBytes));
+                      child: 
+                        Row(
+                          children: [
+                            ElevatedButton(
+                                onPressed: () async{
+                                  print(_searching.toString());
 
-                              List<Book> list_product = [];
-                              for (var d in data) {
-                                  if (d != null) {
-                                      list_product.add(Book.fromJson(d));
+                                  _searching ??= "";
+
+                                  var searchedBooks = await http.get(Uri.parse('http://127.0.0.1:8000/katalog/search-books-json/$_searching'),headers: {"Content-Type": "application/json"});
+                                  var data = jsonDecode(utf8.decode(searchedBooks.bodyBytes));
+
+                                  List<Book> list_product = [];
+                                  for (var d in data) {
+                                      if (d != null) {
+                                          list_product.add(Book.fromJson(d));
+                                      }
                                   }
-                              }
-                              setState(() {
-                              _books = Future<List<Book>>.value(list_product);
-                              _searching="";
-                              });
-                            },
-                            child: const Text("Search")) 
-                    ),   
+                                  setState(() {
+                                  _books = Future<List<Book>>.value(list_product);
+                                  _searching="";
+                                  });
+                                },
+                                child: const Text("Search")
+                            ),
+                            // ElevatedButton(
+                            //     onPressed: () async{
+                            //       var searchedBooks = await http.get(Uri.parse('http://127.0.0.1:8000/katalog/search-books-json/$_searching'),headers: {"Content-Type": "application/json"});
+                            //       var data = jsonDecode(utf8.decode(searchedBooks.bodyBytes));
+
+                            //       List<Book> listProduct = [];
+                            //       for (var d in data) {
+                            //           if (d != null) {
+                            //               listProduct.add(Book.fromJson(d));
+                            //           }
+                            //       }
+                            //       setState(() {
+                            //       _books = Future<List<Book>>.value(listProduct);
+                            //       _searching="";
+                            //       });
+                            //     }
+                            //     , child: const Icon(Icons.sort)
+                            // )
+                            DropdownButton(
+                              items: [
+                                DropdownMenuItem<String>(child: Text("A-Z"), value:"1"), 
+                                DropdownMenuItem<String>(child: Text("Z-A"), value:"2"),
+                                DropdownMenuItem<String>(child: Text("First Published"), value:"3"),
+                                DropdownMenuItem<String>(child: Text("Last Published"), value:"4"),
+                                DropdownMenuItem<String>(child: Text("Before 2000"), value: "5",),
+                                DropdownMenuItem<String>(child: Text("After 2000"), value: "6",),
+                              ],
+                              onChanged: dropdownCallback,
+                              value:_dropdownValue,
+                              icon: const Icon(Icons.sort),
+                              hint: const Text("Sort"),
+                            )
+                          ]
+                        )
+                    ),
                   ]
               ),
               )
@@ -105,10 +175,10 @@ class _MyHomePageState extends State<MyHomePage> {
               FutureBuilder(
               future: _books,
               builder: (context, AsyncSnapshot snapshot){
-                      print(_books);
                       if (snapshot.data == null) {
                           return const Center(child: CircularProgressIndicator());
-                      } else {
+                      }
+                      else {
                           if (!snapshot.hasData) {
                             return const Column(
                               children: [
@@ -119,8 +189,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               SizedBox(height: 8),
                               ],
-                          );
-                          } else {
+                            );
+                          } 
+                          else {
                               return GridView.builder(
                                 itemCount: snapshot.data.length,
                                 shrinkWrap: true,
@@ -129,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   return BookCard(item: snapshot.data[index]);
                                 }
                               );
-                            }
+                          }
                       }
               }
               )

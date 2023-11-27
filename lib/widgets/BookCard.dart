@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 import 'package:readify_app/models/Book.dart';
-import 'package:readify_app/screens/HomePage.dart';
 
 class BookCard extends StatelessWidget {
   final Book item;
@@ -20,7 +17,10 @@ class BookCard extends StatelessWidget {
               Text(item.fields.title),
               Text(item.fields.author),
               ElevatedButton(onPressed: (){
-                
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(SnackBar(
+                    content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
               }, child: Text("See More"))
             ],
           ),
