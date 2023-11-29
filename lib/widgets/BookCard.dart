@@ -8,20 +8,28 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String title=item.fields.title;
+    if(item.fields.title.length>40){
+      title="${item.fields.title.substring(0,40)}...";
+    }
     return Material(
       child: Card(
         child: Center(child:
           Column(
             children: [
               Image.network(item.fields.imageUrlS),
-              Text(item.fields.title),
-              Text(item.fields.author),
+              Text(title,
+                style: const TextStyle(fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+              Text(item.fields.author,
+                style: const TextStyle(fontSize: 10),),
               ElevatedButton(onPressed: (){
                 ScaffoldMessenger.of(context)
                   ..hideCurrentSnackBar()
                   ..showSnackBar(SnackBar(
                     content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
-              }, child: Text("See More"))
+              }, child: const Text("See More"))
             ],
           ),
         )

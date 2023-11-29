@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:readify_app/widgets/BookCard.dart';
+import 'package:readify_app/widgets/Drawer.dart';
 import 'package:readify_app/models/Book.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -26,7 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(selectedValue is String){
       
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/katalog/sort-books-json/'),
+        Uri.parse('http://127.0.0.1:8000/katalog/sort-books-json/$_searching'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -75,19 +76,15 @@ class _MyHomePageState extends State<MyHomePage> {
               'Readify',
               style: TextStyle(fontFamily:"GoogleDisplay"),
             ),
-            backgroundColor: Color.fromARGB(255, 56, 30, 103),
+            backgroundColor: const Color.fromARGB(255, 56, 30, 103),
             foregroundColor: Colors.white,
         ),
+        drawer: const EndDrawer(),
         body:
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children : [
-            Center(
-              widthFactor: 1,
-              child:
-              SizedBox(
-                width: 800,
-                height: 150,
-                child : Wrap(
+            Wrap(
                   runSpacing:1.0,
                   spacing: 8.0,
                   // alignment: WrapAlignment.center,
@@ -112,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     ElevatedButton(
                                 onPressed: () async{
-                                  print(_searching.toString());
+                                  // print(_searching.toString());
 
                                   _searching ??= "";
 
@@ -126,8 +123,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       }
                                   }
                                   setState(() {
-                                  _books = Future<List<Book>>.value(list_product);
-                                  _searching="";
+                                    _books = Future<List<Book>>.value(list_product);
+                                    _dropdownValue="1";
                                   });
                                 },
                                 child: const Text("Search")
@@ -153,8 +150,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         )
 
                   ]
-              ),
-              )
             ),
             Expanded(child: 
               FutureBuilder(
@@ -180,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               return GridView.builder(
                                 itemCount: snapshot.data.length,
                                 shrinkWrap: true,
-                                gridDelegate: CustomGridDelegate(dimension: 250.0),
+                                gridDelegate: CustomGridDelegate(dimension: 170.0),
                                 itemBuilder: (context, index) {
                                   return BookCard(item: snapshot.data[index]);
                                 }
