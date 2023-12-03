@@ -24,7 +24,7 @@ class _CarouselState extends State<Carousel> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.8, initialPage: 0);
+    _pageController = PageController(viewportFraction: 0.8, initialPage: 0  );
   }
 
   @override
@@ -94,7 +94,7 @@ List<Widget> indicators(imagesLength, currentIndex) {
       width: 10,
       height: 10,
       decoration: BoxDecoration(
-          color: currentIndex == index ? Colors.black : Colors.black26,
+          color: currentIndex == index ? Colors.white : Colors.white24,
           shape: BoxShape.circle),
     );
   });
