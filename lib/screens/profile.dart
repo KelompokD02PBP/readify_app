@@ -1,4 +1,4 @@
-
+  
 
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -58,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-    debugPrint(request.jsonData.toString());
+    // debugPrint(request.jsonData.toString());
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
