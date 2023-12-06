@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:readify_app/screens/login.dart';
-
+import 'package:http_parser/http_parser.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -121,6 +121,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       files.add(http.MultipartFile.fromBytes(
                           "profile_picture",
                           await imagePicked.readAsBytes(),
+                          contentType: MediaType.parse(imagePicked.mimeType!),
+                          filename: imagePicked.name,
                         )
                       );
                     }

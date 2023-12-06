@@ -3,7 +3,7 @@ Modification of pbp_django_auth 0.4.0 by Tim Asdos PBP
 https://pub.dev/packages/pbp_django_auth
 Modifications:
 - Changed CookieRequest._updateCookie() input to http.BaseResponse instead of http.Response
-- Added CookieRequest.postFormData()
+- Added CookieRequest.postFormData() to facilitate sending files to server from client
  */
 
 import 'package:http/http.dart' as http;
