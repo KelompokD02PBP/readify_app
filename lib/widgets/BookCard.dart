@@ -13,18 +13,34 @@ class BookCard extends StatelessWidget {
       title="${item.fields.title.substring(0,40)}...";
     }
     return Material(
-      child: Card(
+      color: Colors.black38,
+      
+      borderOnForeground: false,
+      child:
+      Card(
+        color: Colors.black38,
         child: Center(child:
           Column(
             children: [
               Image.network(item.fields.imageUrlS),
               Text(title,
-                style: const TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12, color: Colors.white70),
                 textAlign: TextAlign.center,
               ),
               Text(item.fields.author,
-                style: const TextStyle(fontSize: 10),),
-              ElevatedButton(onPressed: (){
+                style: const TextStyle(fontSize: 10,color: Colors.white70),),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:  MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.pressed)) {
+                        return Colors.blueGrey;
+                      }
+                      return Colors.amber; // Use the component's default.
+                    },
+                  ),
+                ),
+                onPressed: (){
                 ScaffoldMessenger.of(context)
                   ..hideCurrentSnackBar()
                   ..showSnackBar(SnackBar(

@@ -15,6 +15,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  bool kDebugMode=false;
+
   var _books;
   var _dropdownValue;
   String? _searching;
@@ -26,6 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void dropdownCallback(Object? selectedValue) async{
     if(selectedValue is String){
       
+      _searching ??= "";
+
       final response = await http.post(
         Uri.parse('http://127.0.0.1:8000/katalog/sort-books-json/$_searching'),
         headers: <String, String>{
@@ -57,6 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
       // melakukan decode response menjadi bentuk json
       var data = jsonDecode(utf8.decode(response.bodyBytes));
+      if (kDebugMode) {
+        print("\n response:$data");
+      }
+      
 
       // melakukan konversi data json menjadi object Product
       List<Book> listProduct = [];
@@ -76,9 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
               'Readify',
               style: TextStyle(fontFamily:"GoogleDisplay"),
             ),
-            backgroundColor: const Color.fromARGB(255, 56, 30, 103),
-            foregroundColor: Colors.white,
+            backgroundColor: Colors.black87,
+            foregroundColor: Colors.amberAccent,
         ),
+        backgroundColor: const Color.fromARGB(255, 43, 39, 49),
         drawer: const EndDrawer(),
         body:
         Column(
@@ -92,13 +101,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   children:[
                     SizedBox(
                       width: 600,
-                      height: 100,
+                      height: 70,
                       child: 
                       TextField(
                       autocorrect: true,
+                      style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255),),
                       decoration: const InputDecoration(
+                        hintStyle: TextStyle(color: Color.fromARGB(97, 255, 255, 255),),
                         hintText: "Lorem Ipsum",
-                        labelText: "Search"
+                        labelText: "Search",
+                        labelStyle: TextStyle(color: Colors.amberAccent),
                       ),
                       onChanged: (String? values){
                         setState(() {
@@ -115,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                                   var searchedBooks = await http.get(Uri.parse('http://127.0.0.1:8000/katalog/search-books-json/$_searching'),headers: {"Content-Type": "application/json"});
                                   var data = jsonDecode(utf8.decode(searchedBooks.bodyBytes));
+                                  print(searchedBooks);
 
                                   List<Book> list_product = [];
                                   for (var d in data) {
@@ -133,6 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             
                             DropdownButton(
+                              iconEnabledColor: Colors.amber,
                               items: const [
                                 DropdownMenuItem<String>(value:"1", child: Text("A-Z")), 
                                 DropdownMenuItem<String>(value:"2", child: Text("Z-A")),
@@ -144,14 +158,17 @@ class _MyHomePageState extends State<MyHomePage> {
                               onChanged: dropdownCallback,
                               value:_dropdownValue,
                               icon: const Icon(Icons.sort),
-                              hint: const Text("Sort"),
+                              hint: const Text("Sort", style: TextStyle(color: Colors.amber),),
+                              style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255)),
+                              dropdownColor: Colors.orangeAccent,
                             )
                           ]
                         )
 
                   ]
             ),
-            Expanded(child: 
+            Expanded(
+              child: 
               FutureBuilder(
               future: _books,
               builder: (context, AsyncSnapshot snapshot){
@@ -178,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 gridDelegate: CustomGridDelegate(dimension: 170.0),
                                 itemBuilder: (context, index) {
                                   return BookCard(item: snapshot.data[index]);
-                                }
+                                },
                               );
                           }
                       }
