@@ -52,12 +52,13 @@ class _CarouselState extends State<Carousel> {
     return Column(
       children: [
         if (books.isEmpty)
-          const CircularProgressIndicator() // Show a loading indicator if books are being fetched
+          const Text("No Books")
         else
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 400,
             child: PageView.builder(
+              
               itemCount: books.length,
               pageSnapping: true,
               controller: _pageController,
