@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:readify_app/screens/login.dart';
+import 'package:http_parser/http_parser.dart';
+
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -109,13 +111,16 @@ class _RegisterPageState extends State<RegisterPage> {
                   String address = _addressController.text;
                   List<http.MultipartFile> files = [];
 
-                  final imagePicked = _imagePicked;
-                  if (imagePicked != null) {
-                    files.add(http.MultipartFile.fromBytes(
-                      "profile_picture",
-                      await imagePicked.readAsBytes(),
-                    ));
-                  }
+                    final imagePicked = _imagePicked;
+                    if (imagePicked != null) {
+                      files.add(http.MultipartFile.fromBytes(
+                          "profile_picture",
+                          await imagePicked.readAsBytes(),
+                          contentType: MediaType.parse(imagePicked.mimeType!),
+                          filename: imagePicked.name,
+                        )
+                      );
+                    }
 
                   final response = await request.postFormData(
                     "http://localhost:8000/api/register/",
