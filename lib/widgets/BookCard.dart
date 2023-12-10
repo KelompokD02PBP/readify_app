@@ -12,23 +12,24 @@ class BookCard extends StatelessWidget {
     if(item.fields.title.length>40){
       title="${item.fields.title.substring(0,40)}...";
     }
-    return Material(
-      color: Colors.black38,
-      
-      borderOnForeground: false,
-      child:
+    return 
       Card(
         color: Colors.black38,
-        child: Center(child:
+        child: 
+        Center(child:
           Column(
             children: [
+              Expanded(child: 
               Image.network(item.fields.imageUrlS),
+              ),
               Text(title,
                 style: const TextStyle(fontSize: 12, color: Colors.white70),
                 textAlign: TextAlign.center,
               ),
-              Text(item.fields.author,
-                style: const TextStyle(fontSize: 10,color: Colors.white70),),
+              Text(
+                item.fields.author,
+                style: const TextStyle(fontSize: 10,color: Colors.white70),
+              ),
               ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor:  MaterialStateProperty.resolveWith<Color?>(
@@ -45,11 +46,11 @@ class BookCard extends StatelessWidget {
                   ..hideCurrentSnackBar()
                   ..showSnackBar(SnackBar(
                     content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
-              }, child: const Text("See More"))
+              }, child: const Text("See More")),
             ],
           ),
         )
-      )
+      
     );
     
     

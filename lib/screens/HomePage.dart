@@ -90,8 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: const Color.fromARGB(255, 43, 39, 49),
         drawer: const EndDrawer(),
         body:
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        ListView(
           children : [
             Wrap(
                   runSpacing:1.0,
@@ -167,8 +166,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   ]
             ),
-            Expanded(
-              child: 
               FutureBuilder(
               future: _books,
               builder: (context, AsyncSnapshot snapshot){
@@ -192,7 +189,12 @@ class _MyHomePageState extends State<MyHomePage> {
                               return GridView.builder(
                                 itemCount: snapshot.data.length,
                                 shrinkWrap: true,
-                                gridDelegate: CustomGridDelegate(dimension: 170.0),
+                                // gridDelegate: CustomGridDelegate(dimension: 170.0),
+                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 200.0, // Set the maximum width of each item
+                                  crossAxisSpacing: 8.0, // Set the spacing between columns
+                                  mainAxisSpacing: 8.0, // Set the spacing between rows
+                                ),
                                 itemBuilder: (context, index) {
                                   return BookCard(item: snapshot.data[index]);
                                 },
@@ -201,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       }
               }
               )
-            )
+            
           ]
         )
       );
