@@ -23,7 +23,7 @@ class _CarouselState extends State<Carousel> {
   void initState() {
     super.initState();
     _pageController = PageController(viewportFraction: 0.8, initialPage: 0);
-    fetchBooks(); 
+    fetchBooks();
   }
 
   Future<void> fetchBooks() async {
@@ -42,8 +42,7 @@ class _CarouselState extends State<Carousel> {
             response.map((bookJson) => Book.fromJson(bookJson)));
       });
     } catch (error) {
-      print('Error fetching books: $error');
-      // Handle error appropriately, e.g., show an error message
+      debugPrint('Error fetching books: $error');
     }
   }
 
@@ -58,7 +57,6 @@ class _CarouselState extends State<Carousel> {
             width: MediaQuery.of(context).size.width,
             height: 400,
             child: PageView.builder(
-              
               itemCount: books.length,
               pageSnapping: true,
               controller: _pageController,
@@ -113,7 +111,7 @@ class _CarouselState extends State<Carousel> {
 
   @override
   void dispose() {
-    _pageController.dispose(); // Dispose of the PageController when not needed
+    _pageController.dispose();
     super.dispose();
   }
 }
