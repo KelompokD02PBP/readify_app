@@ -279,7 +279,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       : Column(
                           children: [
                             Text(
-                              request.jsonData['username'].toString(),
+                              userName,
                               style: const TextStyle(
                                 fontSize: 24,
                                 color: Colors.white,
@@ -374,6 +374,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                           files,
                         );
+                        print(response);
                         setState(() {
                           isLoading = false;
                         });

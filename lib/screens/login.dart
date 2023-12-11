@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:readify_app/screens/logout.dart';
 import 'package:readify_app/screens/profile.dart';
 import 'package:readify_app/screens/register.dart';
+import 'package:readify_app/screens/HomePage.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                       String uname = response['username'];
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()),
+                        MaterialPageRoute(builder: (context) => MyHomePage()),
                       );
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()

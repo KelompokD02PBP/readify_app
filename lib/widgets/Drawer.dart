@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readify_app/screens/HomePage.dart';
+import 'package:readify_app/screens/profile.dart';
 
 class EndDrawer extends StatelessWidget {
   const EndDrawer({super.key});
@@ -49,10 +50,10 @@ class EndDrawer extends StatelessWidget {
               leading: const Icon(Icons.shopping_basket),
               title: const Text('Profile'),
               onTap: () {
-                  // Navigator.push(
-                  // context,
-                  // MaterialPageRoute(builder: (context) => const ProductPage()),
-                  // );
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                  );
               },
           ),
         ],
