@@ -23,30 +23,44 @@ class BookCard extends StatelessWidget {
               Image.network(item.fields.imageUrlS),
               ),
               Text(title,
-                style: const TextStyle(fontSize: 12, color: Colors.white70),
+                style: const TextStyle(fontSize: 11, color: Colors.white70),
                 textAlign: TextAlign.center,
               ),
               Text(
                 item.fields.author,
-                style: const TextStyle(fontSize: 10,color: Colors.white70),
+                style: const TextStyle(fontSize: 9,color: Colors.white70),
               ),
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:  MaterialStateProperty.resolveWith<Color?>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.pressed)) {
-                        return Colors.blueGrey;
-                      }
-                      return Colors.amber; // Use the component's default.
-                    },
+              Container(
+                constraints: BoxConstraints(
+                  maxHeight: 20,
+                  minHeight: 5,
+                  maxWidth: 100,
+                  minWidth: 100,
                   ),
-                ),
-                onPressed: (){
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(
-                    content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
-              }, child: const Text("See More")),
+                child: 
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:  MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.pressed)) {
+                            return Colors.blueGrey;
+                          }
+                          return Colors.amber; // Use the component's default.
+                        },
+                      ),
+                      minimumSize:MaterialStateProperty.all(Size(100, 5)),
+                      // maximumSize: MaterialStateProperty.all(Size(100,40)),
+                    ),
+                    onPressed: (){
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(SnackBar(
+                        content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
+                    }, 
+                    child:FittedBox(child: const Text("See More")),
+                  ),
+              ),
+              // SizedBox(height: 10.0,)
             ],
           ),
         )
