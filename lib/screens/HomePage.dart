@@ -198,6 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 itemBuilder: (context, index) {
                                   return BookCard(item: snapshot.data[index]);
                                 },
+                                physics: const ScrollPhysics(),
                               );
                           }
                       }

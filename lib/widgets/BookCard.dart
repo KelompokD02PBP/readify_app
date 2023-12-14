@@ -9,13 +9,12 @@ class BookCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String title=item.fields.title;
-    print(title);
+    // print(title);
     if(item.fields.title.length>40){
       title="${item.fields.title.substring(0,40)}...";
     }
     String imageUrl = item.fields.imageUrlS;
-    imageUrl.replaceAll("http://", "https://");
-    imageUrl.replaceAll("images.amazon", "m.media-amazon");
+    imageUrl = imageUrl.replaceAll("http://", "https://").replaceAll("images.amazon", "m.media-amazon");
     return 
       Card(
         color: Colors.black38,
@@ -24,7 +23,7 @@ class BookCard extends StatelessWidget {
           Column(
             children: [
               Expanded(child: 
-              Image.network(item.fields.imageUrlS),
+              Image.network(imageUrl),
               ),
               Text(title,
                 style: const TextStyle(fontSize: 11, color: Colors.white70),
