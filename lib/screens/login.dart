@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:readify_app/screens/profile.dart';
 import 'package:readify_app/screens/register.dart';
 import 'package:readify_app/screens/HomePage.dart';
 
@@ -40,10 +39,14 @@ class _LoginPageState extends State<LoginPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
+        title: const Text(
+          'Login',
+          style: TextStyle(fontFamily:"GoogleDisplay"),
+        ),
+        backgroundColor: Colors.black87,
+        foregroundColor: Colors.amberAccent,
       ),
+      backgroundColor: const Color.fromARGB(255, 43, 39, 49),
       body: Container(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -51,15 +54,19 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             TextField(
               controller: _usernameController,
+              style: const TextStyle(color: Color.fromARGB(179, 255, 255, 255)),
               decoration: const InputDecoration(
                 labelText: 'Username',
+                labelStyle: TextStyle(color: Colors.amberAccent),
               ),
             ),
             const SizedBox(height: 12.0),
             TextField(
               controller: _passwordController,
+              style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255),),
               decoration: const InputDecoration(
                 labelText: 'Password',
+                labelStyle: TextStyle(color: Colors.amberAccent),
               ),
               obscureText: true,
             ),
