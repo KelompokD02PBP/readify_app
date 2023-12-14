@@ -126,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                                   var searchedBooks = await http.get(Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/search-books-json/$_searching'),headers: {"Content-Type": "application/json"});
                                   var data = jsonDecode(utf8.decode(searchedBooks.bodyBytes));
-                                  print(searchedBooks);
+                                  // print(searchedBooks);
 
                                   List<Book> list_product = [];
                                   for (var d in data) {
