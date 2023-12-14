@@ -79,13 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'Readify',
-              style: TextStyle(fontFamily:"GoogleDisplay"),
-            ),
-            backgroundColor: Colors.black87,
-            foregroundColor: Colors.amberAccent,
+        appBar: AppBar(
+          title: const Text(
+            'Readify',
+            style: TextStyle(fontFamily:"GoogleDisplay"),
+          ),
+          backgroundColor: Colors.black87,
+          foregroundColor: Colors.amberAccent,
         ),
         backgroundColor: const Color.fromARGB(255, 43, 39, 49),
         drawer: const EndDrawer(),
