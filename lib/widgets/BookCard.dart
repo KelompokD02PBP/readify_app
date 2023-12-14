@@ -9,9 +9,13 @@ class BookCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String title=item.fields.title;
+    print(title);
     if(item.fields.title.length>40){
       title="${item.fields.title.substring(0,40)}...";
     }
+    String imageUrl = item.fields.imageUrlS;
+    imageUrl.replaceAll("http://", "https://");
+    imageUrl.replaceAll("images.amazon", "m.media-amazon");
     return 
       Card(
         color: Colors.black38,
@@ -57,7 +61,7 @@ class BookCard extends StatelessWidget {
                       ..showSnackBar(SnackBar(
                         content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
                     }, 
-                    child:FittedBox(child: const Text("See More")),
+                    child:const FittedBox(child: const Text("See More")),
                   ),
               ),
               // SizedBox(height: 10.0,)

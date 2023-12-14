@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _searching ??= "";
 
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/katalog/sort-books-json/$_searching'),
+        Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/sort-books-json/$_searching'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<List<Book>> fetchProduct() async {
-      var url = Uri.parse('http://127.0.0.1:8000/katalog/get-books-json');
+      var url = Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/get-books-json');
       var response = await http.get(url, headers: {"Content-Type": "application/json"});
 
       // melakukan decode response menjadi bentuk json
@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                                   _searching ??= "";
 
-                                  var searchedBooks = await http.get(Uri.parse('http://127.0.0.1:8000/katalog/search-books-json/$_searching'),headers: {"Content-Type": "application/json"});
+                                  var searchedBooks = await http.get(Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/search-books-json/$_searching'),headers: {"Content-Type": "application/json"});
                                   var data = jsonDecode(utf8.decode(searchedBooks.bodyBytes));
                                   print(searchedBooks);
 

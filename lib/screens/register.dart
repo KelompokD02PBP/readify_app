@@ -123,7 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     }
 
                   final response = await request.postFormData(
-                    "http://localhost:8000/api/register/",
+                    "https://readify-d02-tk.pbp.cs.ui.ac.id/api/register/",
                     {
                       'username': username,
                       'password1': password1,

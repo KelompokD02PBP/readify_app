@@ -57,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
     try {
       final request = context.read<CookieRequest>();
       final response = await request.postJson(
-        "http://127.0.0.1:8000/show_profile_flutter/",
+        "https://readify-d02-tk.pbp.cs.ui.ac.id/show_profile_flutter/",
         jsonEncode({
           "username": request.jsonData["username"],
           "id": request.jsonData["id"],
@@ -74,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
           userProfileImage = 'assets/images/anon.png';
         } else {
           userProfileImage =
-              'http://127.0.0.1:8000/${response["profile"]["profile_picture"]}';
+              'https://readify-d02-tk.pbp.cs.ui.ac.id${response["profile"]["profile_picture"]}';
         }
         _nameController.text = userName;
         _emailController.text = userEmail;
@@ -364,7 +364,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         isLoading = true;
 
                         final response = await request.postFormData(
-                          "http://localhost:8000/update-profile/",
+                          "https://readify-d02-tk.pbp.cs.ui.ac.id/update-profile/",
                           {
                             'id': request.jsonData['id'].toString(),
                             'username': username,
@@ -391,7 +391,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               userProfileImage = 'assets/images/anon.png';
                             } else {
                               userProfileImage =
-                                  'http://127.0.0.1:8000/${response["profile"]["profile_picture"]}';
+                                  'https://readify-d02-tk.pbp.cs.ui.ac.id${response["profile"]["profile_picture"]}';
                             }
 
                             showDialog(
