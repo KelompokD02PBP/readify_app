@@ -205,7 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   return 'Address is required';
                                 }
                               
-                              
+
 
                                 return null;
                               },
@@ -279,7 +279,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       : Column(
                           children: [
                             Text(
-                              request.jsonData['username'].toString(),
+                              userName,
                               style: const TextStyle(
                                 fontSize: 24,
                                 color: Colors.white,
