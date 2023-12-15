@@ -30,7 +30,7 @@ class _CarouselState extends State<Carousel> {
     try {
       final request = context.read<CookieRequest>();
       final response = await request.postJson(
-        "http://127.0.0.1:8000/get-liked-books/",
+        "https://readify-d02-tk.pbp.cs.ui.ac.id/get-liked-books/",
         jsonEncode({
           "username": request.jsonData["username"],
           "id": request.jsonData["id"],

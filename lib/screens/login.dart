@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:readify_app/screens/logout.dart';
-import 'package:readify_app/screens/profile.dart';
 import 'package:readify_app/screens/register.dart';
+import 'package:readify_app/screens/HomePage.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -40,10 +39,14 @@ class _LoginPageState extends State<LoginPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
+        title: const Text(
+          'Login',
+          style: TextStyle(fontFamily:"GoogleDisplay"),
+        ),
+        backgroundColor: Colors.black87,
+        foregroundColor: Colors.amberAccent,
       ),
+      backgroundColor: const Color.fromARGB(255, 43, 39, 49),
       body: Container(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -51,15 +54,19 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             TextField(
               controller: _usernameController,
+              style: const TextStyle(color: Color.fromARGB(179, 255, 255, 255)),
               decoration: const InputDecoration(
                 labelText: 'Username',
+                labelStyle: TextStyle(color: Colors.amberAccent),
               ),
             ),
             const SizedBox(height: 12.0),
             TextField(
               controller: _passwordController,
+              style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255),),
               decoration: const InputDecoration(
                 labelText: 'Password',
+                labelStyle: TextStyle(color: Colors.amberAccent),
               ),
               obscureText: true,
             ),
@@ -75,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                     // Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                     // Untuk menyambungkan Android emulator dengan Django pada localhost,
                     // gunakan URL http://10.0.2.2/
-                    final response = await request.login("http://localhost:8000/api/login/", {
+                    final response = await request.login("https://readify-d02-tk.pbp.cs.ui.ac.id/api/login/", {
                       'username': username,
                       'password': password,
                     });
@@ -85,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                       String uname = response['username'];
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()),
+                        MaterialPageRoute(builder: (context) => MyHomePage()),
                       );
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
