@@ -27,7 +27,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
         foregroundColor: Colors.amberAccent,
       ),
       backgroundColor: const Color.fromARGB(255, 43, 39, 49),
-      body: Container(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -90,15 +90,19 @@ class _LoginPageState extends State<LoginPage> {
                     if (request.loggedIn) {
                       String message = response['message'];
                       String uname = response['username'];
+                      if(context.mounted){
+
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                        MaterialPageRoute(builder: (context) => const  MyHomePage()),
                       );
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(
                             SnackBar(content: Text("$message Selamat datang, $uname.")));
+                      }
                     } else {
+                      if(context.mounted){
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
@@ -115,6 +119,8 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                       );
+
+                      }
                     }
                   },
                   child: const Text('Login'),
@@ -124,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () async {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => RegisterPage()),
+                        MaterialPageRoute(builder: (context) => const RegisterPage()),
                       );
                   },
                   child: const Text('Register'),

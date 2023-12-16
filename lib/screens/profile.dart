@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:readify_app/widgets/Drawer.dart';
 import 'package:readify_app/widgets/carousel.dart';
 import 'dart:convert';
 
@@ -91,17 +92,18 @@ class _ProfilePageState extends State<ProfilePage> {
     final request = context.watch<CookieRequest>();
     debugPrint(request.jsonData.toString());
     return Scaffold(
-        backgroundColor: Colors.black,
         appBar: AppBar(
-          title: const Text('Profile'),
-          titleTextStyle: const TextStyle(
-            color: Color.fromRGBO(236, 190, 23, 1.0),
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-          backgroundColor: Colors.black,
+        title: const Text(
+          'Profile',
+          style: TextStyle(fontFamily:"GoogleDisplay"),
         ),
+        backgroundColor: Colors.black87,
+        foregroundColor: Colors.amberAccent,
+      ),
+      drawer: const EndDrawer(),
+        backgroundColor: const Color.fromARGB(255, 43, 39, 49),
         body: SingleChildScrollView(
+          
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 40.0),
@@ -170,6 +172,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             const SizedBox(height: 10),
                             TextFormField(
                               controller: _passwordController,
+                              obscureText: true,
                               decoration: const InputDecoration(
                                 labelText: 'Password',
                                 labelStyle: TextStyle(

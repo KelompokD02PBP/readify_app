@@ -22,7 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _addressController = TextEditingController();
   final _imagePicker = ImagePicker();
   XFile? _imagePicked;
-  Text imageName = const Text("");
+  Text imageName = const Text("",style: TextStyle(color: Color.fromARGB(179, 255, 255, 255)));
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                     debugPrint(imagePicked.path);
 
-                    Text nextText = Text(imagePicked.name);
+                    Text nextText = Text(imagePicked.name,style: const TextStyle(color: Color.fromARGB(179, 255, 255, 255)));
 
                     _imagePicked = imagePicked;
                     setState(() {
