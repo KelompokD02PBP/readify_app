@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:readify_app/screens/HomePage.dart';
+import 'package:readify_app/screens/home_page.dart';
 import 'package:readify_app/screens/profile.dart';
 import '../classes/pbp_django_auth.dart';
 import '../screens/login.dart';
@@ -83,7 +83,7 @@ class EndDrawer extends StatelessWidget {
               } else {
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("$message"),
+                    content: Text(message),
                   ));
                 }
               }

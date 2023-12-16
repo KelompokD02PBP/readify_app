@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:readify_app/models/Book.dart';
+import 'package:readify_app/models/book.dart';
 
 class BookCard extends StatelessWidget {
   final Book item;
@@ -34,7 +34,7 @@ class BookCard extends StatelessWidget {
                 style: const TextStyle(fontSize: 9,color: Colors.white70),
               ),
               Container(
-                constraints: BoxConstraints(
+                constraints: const  BoxConstraints(
                   maxHeight: 20,
                   minHeight: 5,
                   maxWidth: 100,
@@ -51,7 +51,7 @@ class BookCard extends StatelessWidget {
                           return Colors.amber; // Use the component's default.
                         },
                       ),
-                      minimumSize:MaterialStateProperty.all(Size(100, 5)),
+                      minimumSize:MaterialStateProperty.all(const Size(100, 5)),
                       // maximumSize: MaterialStateProperty.all(Size(100,40)),
                     ),
                     onPressed: (){
@@ -60,7 +60,7 @@ class BookCard extends StatelessWidget {
                       ..showSnackBar(SnackBar(
                         content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
                     }, 
-                    child:const FittedBox(child: const Text("See More")),
+                    child:const FittedBox(child: Text("See More")),
                   ),
               ),
               // SizedBox(height: 10.0,)
