@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:readify_app/screens/login.dart';
 import 'package:http_parser/http_parser.dart';
 
-
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -111,19 +110,19 @@ class _RegisterPageState extends State<RegisterPage> {
                   String address = _addressController.text;
                   List<http.MultipartFile> files = [];
 
-                    final imagePicked = _imagePicked;
-                    if (imagePicked != null) {
-                      files.add(http.MultipartFile.fromBytes(
-                          "profile_picture",
-                          await imagePicked.readAsBytes(),
-                          contentType: MediaType.parse(imagePicked.mimeType!),
-                          filename: imagePicked.name,
-                        )
-                      );
-                    }
+                  final imagePicked = _imagePicked;
+                  if (imagePicked != null) {
+                    files.add(http.MultipartFile.fromBytes(
+                      "profile_picture",
+                      await imagePicked.readAsBytes(),
+                      contentType: MediaType.parse(imagePicked.mimeType!),
+                      filename: imagePicked.name,
+                    ));
+                  }
 
+                  //untuk dev gunakan http://localhost:8000/api/register/
                   final response = await request.postFormData(
-                    "https://readify-d02-tk.pbp.cs.ui.ac.id/api/register/",
+                    "http://localhost:8000/api/register",
                     {
                       'username': username,
                       'password1': password1,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:readify_app/screens/profile.dart';
 import 'package:readify_app/screens/register.dart';
 import 'package:readify_app/screens/HomePage.dart';
 
@@ -64,66 +63,71 @@ class _LoginPageState extends State<LoginPage> {
               obscureText: true,
             ),
             const SizedBox(height: 24.0),
-            Row(
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () async {
-                    String username = _usernameController.text;
-                    String password = _passwordController.text;
+            Row(children: <Widget>[
+              ElevatedButton(
+                onPressed: () async {
+                  String username = _usernameController.text;
+                  String password = _passwordController.text;
 
-                    // Cek kredensial
-                    // Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                    // Untuk menyambungkan Android emulator dengan Django pada localhost,
-                    // gunakan URL http://10.0.2.2/
-                    final response = await request.login("https://readify-d02-tk.pbp.cs.ui.ac.id/api/login/", {
-                      'username': username,
-                      'password': password,
-                    });
+                  // Cek kredensial
+                  // Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+                  // Untuk menyambungkan Android emulator dengan Django pada localhost,
+                  // gunakan URL http://10.0.2.2/
+                  // untuk dev gunakan url  http://localhost:8000/api/login/
+                  final response =
+                      await request.login("http://localhost:8000/api/login/", {
+                    'username': username,
+                    'password': password,
+                  });
 
-                    if (request.loggedIn) {
-                      String message = response['message'];
-                      String uname = response['username'];
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => MyHomePage()),
-                      );
-                      ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(
-                            SnackBar(content: Text("$message Selamat datang, $uname.")));
-                    } else {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('Login Gagal'),
-                          content:
-                          Text(response['message']),
-                          actions: [
-                            TextButton(
-                              child: const Text('OK'),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ],
+                  if (request.loggedIn) {
+                    print(response);
+                    String message = response['message'];
+                    String uname = response['username'];
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyHomePage(),
+                        settings: RouteSettings(
+                          arguments: uname,
                         ),
-                      );
-                    }
-                  },
-                  child: const Text('Login'),
-                ),
-                const SizedBox(width: 12.0),
-                ElevatedButton(
-                  onPressed: () async {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterPage()),
-                      );
-                  },
-                  child: const Text('Register'),
-                ),
-              ]
-            ),
+                      ),
+                    );
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(SnackBar(
+                          content: Text("$message Selamat datang, $uname.")));
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Login Gagal'),
+                        content: Text(response['message']),
+                        actions: [
+                          TextButton(
+                            child: const Text('OK'),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
+                child: const Text('Login'),
+              ),
+              const SizedBox(width: 12.0),
+              ElevatedButton(
+                onPressed: () async {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterPage()),
+                  );
+                },
+                child: const Text('Register'),
+              ),
+            ]),
           ],
         ),
       ),

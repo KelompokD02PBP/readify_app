@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readify_app/screens/HomePage.dart';
+import 'package:readify_app/screens/likes_page.dart';
 import 'package:readify_app/screens/profile.dart';
 
 class EndDrawer extends StatelessWidget {
@@ -11,7 +12,7 @@ class EndDrawer extends StatelessWidget {
       child: ListView(
         children: [
           const DrawerHeader(
-              decoration: BoxDecoration(
+            decoration: BoxDecoration(
               color: Color.fromARGB(255, 56, 30, 103),
             ),
             child: Column(
@@ -26,14 +27,14 @@ class EndDrawer extends StatelessWidget {
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(10)),
-                Text("Review Buku!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color:Colors.white, fontSize: 15),
-                    ),
+                Text(
+                  "Review Buku!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
               ],
             ),
           ),
-          
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Halaman Utama'),
@@ -44,17 +45,31 @@ class EndDrawer extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => const MyHomePage(),
                   ));
-              },
+            },
           ),
           ListTile(
-              leading: const Icon(Icons.shopping_basket),
-              title: const Text('Profile'),
-              onTap: () {
-                  Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
-                  );
-              },
+            leading: const Icon(Icons.shopping_basket),
+            title: const Text('Profile'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.favorite_border_sharp),
+            title: const Text('Disukai'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LikesPage(
+                      username:
+                          'jeje'), // Ganti 'jeje' dengan username yang sesuai
+                ),
+              );
+            },
           ),
         ],
       ),
