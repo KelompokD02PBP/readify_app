@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:readify_app/classes/pbp_django_auth.dart';
+=======
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
+>>>>>>> d525e882083a86b8f42ebb7b9c93ffc43d639bef
 import 'package:provider/provider.dart';
 import 'package:readify_app/screens/register.dart';
 import 'package:readify_app/screens/HomePage.dart';
+
 
 void main() {
   runApp(const LoginApp());
