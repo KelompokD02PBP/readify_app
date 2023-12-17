@@ -3,7 +3,6 @@ import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:readify_app/screens/login.dart';
 
-
 void main() {
   runApp(const LogoutApp());
 }
@@ -27,7 +26,7 @@ class LogoutPage extends StatefulWidget {
   const LogoutPage({super.key});
 
   @override
-  _LogoutPageState createState() => _LogoutPageState();
+  State<LogoutPage> createState() => _LogoutPageState();
 }
 
 class _LogoutPageState extends State<LogoutPage> {
@@ -50,22 +49,28 @@ class _LogoutPageState extends State<LogoutPage> {
             ElevatedButton(
               onPressed: () async {
                 // Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                final response = await request.logout("https://readify-d02-tk.pbp.cs.ui.ac.id/api/logout/");
+                final response = await request.logout(
+                    "https://readify-d02-tk.pbp.cs.ui.ac.id/api/logout/");
 
                 String message = response["message"];
                 if (response['status']) {
                   String uname = response["username"];
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("$message Sampai jumpa, $uname."),
-                  ));
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("$message Sampai jumpa, $uname."),
+                    ));
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
+                    );
+                  }
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("$message"),
-                  ));
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(message),
+                    ));
+                  }
                 }
               },
               child: const Text('Logout'),

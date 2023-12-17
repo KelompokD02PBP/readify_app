@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD:lib/widgets/BookCard.dart
 import 'package:readify_app/models/Book.dart';
 import 'package:readify_app/screens/detail_book.dart';
+=======
+import 'package:readify_app/models/book.dart';
+>>>>>>> c421f19276993a0e1f0ad013713ab52a5b44c009:lib/widgets/book_card.dart
 
 class BookCard extends StatelessWidget {
   final Book item;
@@ -11,6 +15,7 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD:lib/widgets/BookCard.dart
     String title = item.fields.title;
     print(title);
     if (item.fields.title.length > 40) {
@@ -20,12 +25,28 @@ class BookCard extends StatelessWidget {
     imageUrl.replaceAll("http://", "https://");
     imageUrl.replaceAll("images.amazon", "m.media-amazon");
     return Card(
+=======
+    String title=item.fields.title;
+    // print(title);
+    if(item.fields.title.length>40){
+      title="${item.fields.title.substring(0,40)}...";
+    }
+    String imageUrl = item.fields.imageUrlS;
+    imageUrl = imageUrl.replaceAll("http://", "https://").replaceAll("images.amazon", "m.media-amazon");
+    return 
+      Card(
+>>>>>>> c421f19276993a0e1f0ad013713ab52a5b44c009:lib/widgets/book_card.dart
         color: Colors.black38,
         child: Center(
           child: Column(
             children: [
+<<<<<<< HEAD:lib/widgets/BookCard.dart
               Expanded(
                 child: Image.network(item.fields.imageUrlS),
+=======
+              Expanded(child: 
+              Image.network(imageUrl),
+>>>>>>> c421f19276993a0e1f0ad013713ab52a5b44c009:lib/widgets/book_card.dart
               ),
               Text(
                 title,
@@ -37,11 +58,12 @@ class BookCard extends StatelessWidget {
                 style: const TextStyle(fontSize: 9, color: Colors.white70),
               ),
               Container(
-                constraints: BoxConstraints(
+                constraints: const  BoxConstraints(
                   maxHeight: 20,
                   minHeight: 5,
                   maxWidth: 100,
                   minWidth: 100,
+<<<<<<< HEAD:lib/widgets/BookCard.dart
                 ),
                 child: ElevatedButton(
                   style: ButtonStyle(
@@ -55,6 +77,30 @@ class BookCard extends StatelessWidget {
                     ),
                     minimumSize: MaterialStateProperty.all(Size(100, 5)),
                     // maximumSize: MaterialStateProperty.all(Size(100,40)),
+=======
+                  ),
+                child: 
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:  MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.pressed)) {
+                            return Colors.blueGrey;
+                          }
+                          return Colors.amber; // Use the component's default.
+                        },
+                      ),
+                      minimumSize:MaterialStateProperty.all(const Size(100, 5)),
+                      // maximumSize: MaterialStateProperty.all(Size(100,40)),
+                    ),
+                    onPressed: (){
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(SnackBar(
+                        content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
+                    }, 
+                    child:const FittedBox(child: Text("See More")),
+>>>>>>> c421f19276993a0e1f0ad013713ab52a5b44c009:lib/widgets/book_card.dart
                   ),
                   onPressed: () {
                     Navigator.push(

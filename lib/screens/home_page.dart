@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:readify_app/widgets/BookCard.dart';
-import 'package:readify_app/widgets/Drawer.dart';
-import 'package:readify_app/models/Book.dart';
+import 'package:readify_app/widgets/book_card.dart';
+import 'package:readify_app/widgets/drawer.dart';
+import 'package:readify_app/models/book.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -16,8 +16,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool kDebugMode = false;
 
-  var _books;
-  var _dropdownValue;
+  // var _books;
+  // var _dropdownValue;
+  Future<List<Book>>? _books;
+  String? _dropdownValue;
   String? _searching;
 
   _MyHomePageState() {
@@ -29,7 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
       _searching ??= "";
 
       final response = await http.post(
-        Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/sort-books-json/$_searching'),
+        Uri.parse(
+            'https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/sort-books-json/$_searching'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -55,14 +58,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // DevNotes: http://localhost:8000
   Future<List<Book>> fetchProduct() async {
-    var url = Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/get-books-json');
+    var url = Uri.parse(
+        'https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/get-books-json');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
 
     // melakukan decode response menjadi bentuk json
     var data = jsonDecode(utf8.decode(response.bodyBytes));
     if (kDebugMode) {
-      print("\n response:$data");
+      // print("\n response:$data");
     }
 
     // melakukan konversi data json menjadi object Product
@@ -130,16 +134,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           headers: {"Content-Type": "application/json"});
                       var data =
                           jsonDecode(utf8.decode(searchedBooks.bodyBytes));
-                      print(searchedBooks);
+                      // print(searchedBooks);
 
-                      List<Book> list_product = [];
+                      List<Book> listProduct = [];
                       for (var d in data) {
                         if (d != null) {
-                          list_product.add(Book.fromJson(d));
+                          listProduct.add(Book.fromJson(d));
                         }
                       }
                       setState(() {
-                        _books = Future<List<Book>>.value(list_product);
+                        _books = Future<List<Book>>.value(listProduct);
                         _dropdownValue = "1";
                       });
                     },
@@ -203,11 +207,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisSpacing: 8.0, // Set the spacing between rows
                       ),
                       itemBuilder: (context, index) {
-                        return BookCard(
-                          item: snapshot.data[index],
-                          uname: uname,
-                        );
+                        return BookCard(item: snapshot.data[index], uname : uname);
                       },
+                      physics: const ScrollPhysics(),
                     );
                   }
                 }
