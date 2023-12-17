@@ -39,7 +39,7 @@ class _BookDetailState extends State<BookDetail> {
 
   // Fungsi untuk mengecek apakah buku dan pengguna sudah disukai
   Future<void> _checkIfLiked(int bookId, int userId) async {
-    final apiUrl = Uri.parse('http://localhost:8000/likes/');
+    final apiUrl = Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/likes/');
     final initialLikesResponse = await http.get(apiUrl);
     final List<dynamic> initialLikes = json.decode(initialLikesResponse.body);
 
@@ -168,7 +168,7 @@ class _BookDetailState extends State<BookDetail> {
   }
 
   void _toggleLike(int id, int iduser) async {
-    final apiUrl = Uri.parse('http://localhost:8000/likes/');
+    final apiUrl = Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/likes/');
     var isnot =
         true; // Kita set ke true dulu, karena belum menemukan like yang sesuai
 
@@ -184,7 +184,7 @@ class _BookDetailState extends State<BookDetail> {
 
       if (likeUserId == iduser && likeBookId == id) {
         isnot = false; // Kita temukan like yang sesuai, set isnot ke false
-        final deleteUrl = Uri.parse('http://localhost:8000/likes/$likeId/');
+        final deleteUrl = Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/likes/$likeId/');
 
         final deleteResponse = await http.delete(
           deleteUrl,

@@ -21,7 +21,7 @@ class _LikesPageState extends State<LikesPage> {
   }
 
   Future<void> _fetchLikedBooks() async {
-    final apiUrl = Uri.parse('http://localhost:8000/likes/');
+    final apiUrl = Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/likes/');
     final likesResponse = await http.get(apiUrl);
 
     if (likesResponse.statusCode == 200) {
@@ -38,7 +38,7 @@ class _LikesPageState extends State<LikesPage> {
 
   Future<Map<String, dynamic>> _fetchBookDetails(int bookId) async {
     final bookDetailsUrl =
-        Uri.parse('http://localhost:8000/katalog/get-books-json-by-pk/$bookId');
+        Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/get-books-json-by-pk/$bookId');
     final bookDetailsResponse = await http.get(bookDetailsUrl);
 
     if (bookDetailsResponse.statusCode == 200) {

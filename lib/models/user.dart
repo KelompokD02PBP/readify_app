@@ -22,7 +22,7 @@ class User {
 
 class UserService {
   static Future<User> fetchUser(String username) async {
-    final apiUrl = Uri.parse('http://localhost:8000/userapi/$username/');
+    final apiUrl = Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/userapi/$username/');
 
     final response = await http.get(apiUrl);
 

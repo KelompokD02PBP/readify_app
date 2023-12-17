@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:readify_app/classes/pbp_django_auth.dart';
-=======
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-
->>>>>>> d525e882083a86b8f42ebb7b9c93ffc43d639bef
 import 'package:provider/provider.dart';
 import 'package:readify_app/screens/register.dart';
 import 'package:readify_app/screens/HomePage.dart';
@@ -81,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   // gunakan URL http://10.0.2.2/
                   // untuk dev gunakan url  http://localhost:8000/api/login/
                   final response =
-                      await request.login("http://localhost:8000/api/login/", {
+                      await request.login("https://readify-d02-tk.pbp.cs.ui.ac.id/api/login/", {
                     'username': username,
                     'password': password,
                   });
