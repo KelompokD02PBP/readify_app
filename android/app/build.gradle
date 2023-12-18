@@ -54,9 +54,9 @@ android {
     signingConfigs {
         release {
             storeFile file("../../release-keystore.jks")
-            storePassword = "$System.env.KEY_PASSWORD"
+            storePassword = "readify"
             keyAlias = "release"
-            keyPassword = "$System.env.KEY_PASSWORD"
+            keyPassword = "readify"
         }
     }
     buildTypes {
