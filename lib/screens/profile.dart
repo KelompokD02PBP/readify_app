@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:readify_app/widgets/drawer.dart';
+import 'package:readify_app/widgets/Drawer.dart';
 import 'package:readify_app/widgets/carousel.dart';
 import 'dart:convert';
 
