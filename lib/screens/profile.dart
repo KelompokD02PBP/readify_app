@@ -357,7 +357,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           files.add(http.MultipartFile.fromBytes(
                             "profile_picture",
                             await imagePicked.readAsBytes(),
-                            contentType: MediaType.parse(imagePicked.mimeType!),
+                            // contentType: MediaType.parse(imagePicked.mimeType!),
                             filename: imagePicked.name,
                           ));
                         }
