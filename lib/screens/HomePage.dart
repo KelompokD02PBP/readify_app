@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:readify_app/widgets/BookCard.dart';
 import 'package:readify_app/widgets/Drawer.dart';
-import 'package:readify_app/models/Book.dart';
+import 'package:readify_app/models/Book2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -103,18 +103,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 70,
                       child: 
                       TextField(
-                      autocorrect: true,
-                      style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255),),
-                      decoration: const InputDecoration(
-                        hintStyle: TextStyle(color: Color.fromARGB(97, 255, 255, 255),),
-                        hintText: "Lorem Ipsum",
-                        labelText: "Search",
-                        labelStyle: TextStyle(color: Colors.amberAccent),
-                      ),
-                      onChanged: (String? values){
-                        setState(() {
-                        _searching = values!;
-                      });
+                        autocorrect: true,
+                        style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255),),
+                        decoration: const InputDecoration(
+                          hintStyle: TextStyle(color: Color.fromARGB(97, 255, 255, 255),),
+                          hintText: "Lorem Ipsum",
+                          labelText: "Search",
+                          labelStyle: TextStyle(color: Colors.amberAccent),
+                        ),
+                        onChanged: (String? values){
+                          setState(() {
+                          _searching = values!;
+                        });
                       },
                     )
                     ),

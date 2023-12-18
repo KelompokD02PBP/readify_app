@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:readify_app/models/Book.dart';
+import 'package:readify_app/models/Book2.dart';
+import 'package:readify_app/screens/per_book.dart';
 
 class BookCard extends StatelessWidget {
   final Book item;
@@ -22,9 +23,9 @@ class BookCard extends StatelessWidget {
         Center(child:
           Column(
             children: [
-              Expanded(child: 
-              Image.network(imageUrl),
-              ),
+              // Expanded(child: 
+              // Image.network(imageUrl),
+              // ),
               Text(title,
                 style: const TextStyle(fontSize: 11, color: Colors.white70),
                 textAlign: TextAlign.center,
@@ -55,10 +56,15 @@ class BookCard extends StatelessWidget {
                       // maximumSize: MaterialStateProperty.all(Size(100,40)),
                     ),
                     onPressed: (){
-                    ScaffoldMessenger.of(context)
-                      ..hideCurrentSnackBar()
-                      ..showSnackBar(SnackBar(
-                        content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
+                    // ScaffoldMessenger.of(context)
+                    //   ..hideCurrentSnackBar()
+                    //   ..showSnackBar(SnackBar(
+                    //     content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
+                        Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PerBook(book:item),
+                        ));
                     }, 
                     child:const FittedBox(child: const Text("See More")),
                   ),
