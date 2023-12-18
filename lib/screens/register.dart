@@ -6,12 +6,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:readify_app/screens/login.dart';
 import 'package:http_parser/http_parser.dart';
 
-
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
@@ -22,7 +21,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _addressController = TextEditingController();
   final _imagePicker = ImagePicker();
   XFile? _imagePicked;
-  Text imageName = const Text("",style: TextStyle(color: Color.fromARGB(179, 255, 255, 255)));
+  Text imageName = const Text("",
+      style: TextStyle(color: Color.fromARGB(179, 255, 255, 255)));
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         title: const Text(
           'Register',
-          style: TextStyle(fontFamily:"GoogleDisplay"),
+          style: TextStyle(fontFamily: "GoogleDisplay"),
         ),
         backgroundColor: Colors.black87,
         foregroundColor: Colors.amberAccent,
@@ -85,10 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: <Widget>[
                 const Text(
                   "Profile image: ",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.amberAccent
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.amberAccent),
                 ),
                 imageName,
                 const SizedBox(width: 24.0),
@@ -100,7 +97,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
                     debugPrint(imagePicked.path);
 
-                    Text nextText = Text(imagePicked.name,style: const TextStyle(color: Color.fromARGB(179, 255, 255, 255)));
+                    Text nextText = Text(imagePicked.name,
+                        style: const TextStyle(
+                            color: Color.fromARGB(179, 255, 255, 255)));
 
                     _imagePicked = imagePicked;
                     setState(() {
@@ -131,16 +130,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   String address = _addressController.text;
                   List<http.MultipartFile> files = [];
 
-                    final imagePicked = _imagePicked;
-                    if (imagePicked != null) {
-                      files.add(http.MultipartFile.fromBytes(
-                          "profile_picture",
-                          await imagePicked.readAsBytes(),
-                          contentType: MediaType.parse(imagePicked.mimeType!),
-                          filename: imagePicked.name,
-                        )
-                      );
-                    }
+                  final imagePicked = _imagePicked;
+                  if (imagePicked != null) {
+                    files.add(http.MultipartFile.fromBytes(
+                      "profile_picture",
+                      await imagePicked.readAsBytes(),
+                      contentType: MediaType.parse(imagePicked.mimeType!),
+                      filename: imagePicked.name,
+                    ));
+                  }
 
                   final response = await request.postFormData(
                     "https://readify-d02-tk.pbp.cs.ui.ac.id/api/register/",
@@ -158,15 +156,20 @@ class _RegisterPageState extends State<RegisterPage> {
 
                   if (status) {
                     String uname = response['username'];
+                    if(context.mounted){
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()
                       ..showSnackBar(SnackBar(
                           content: Text("User $uname berhasil register.")));
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      MaterialPageRoute(builder: (context) => const LoginPage()),
                     );
+
+                    }
                   } else {
+                    if(context.mounted){
+
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
@@ -182,6 +185,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                       ),
                     );
+                    }
                   }
                 },
                 child: const Text('Register'),
@@ -191,7 +195,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 onPressed: () async {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
                   );
                 },
                 child: const Text('Kembali'),

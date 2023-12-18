@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:readify_app/widgets/BookCard.dart';
+import 'package:readify_app/widgets/book_card.dart';
 import 'package:readify_app/widgets/Drawer.dart';
-import 'package:readify_app/models/Book.dart';
+import 'package:readify_app/models/Book2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -78,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String uname = ModalRoute.of(context)!.settings.arguments as String? ?? 'DefaultUser'; 
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -103,18 +104,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 70,
                       child: 
                       TextField(
-                      autocorrect: true,
-                      style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255),),
-                      decoration: const InputDecoration(
-                        hintStyle: TextStyle(color: Color.fromARGB(97, 255, 255, 255),),
-                        hintText: "Lorem Ipsum",
-                        labelText: "Search",
-                        labelStyle: TextStyle(color: Colors.amberAccent),
-                      ),
-                      onChanged: (String? values){
-                        setState(() {
-                        _searching = values!;
-                      });
+                        autocorrect: true,
+                        style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255),),
+                        decoration: const InputDecoration(
+                          hintStyle: TextStyle(color: Color.fromARGB(97, 255, 255, 255),),
+                          hintText: "Lorem Ipsum",
+                          labelText: "Search",
+                          labelStyle: TextStyle(color: Colors.amberAccent),
+                        ),
+                        onChanged: (String? values){
+                          setState(() {
+                          _searching = values!;
+                        });
                       },
                     )
                     ),
@@ -126,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                                   var searchedBooks = await http.get(Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/search-books-json/$_searching'),headers: {"Content-Type": "application/json"});
                                   var data = jsonDecode(utf8.decode(searchedBooks.bodyBytes));
-                                  print(searchedBooks);
+                                  // print(searchedBooks);
 
                                   List<Book> list_product = [];
                                   for (var d in data) {
@@ -196,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   mainAxisSpacing: 8.0, // Set the spacing between rows
                                 ),
                                 itemBuilder: (context, index) {
-                                  return BookCard(item: snapshot.data[index]);
+                                  return BookCard(item: snapshot.data[index], uname:uname);
                                 },
                                 physics: const ScrollPhysics(),
                               );

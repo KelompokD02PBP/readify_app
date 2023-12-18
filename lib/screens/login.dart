@@ -9,7 +9,7 @@ void main() {
 }
 
 class LoginApp extends StatelessWidget {
-  const LoginApp({super.key});
+  const LoginApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class LoginApp extends StatelessWidget {
 }
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: const Text(
           'Login',
-          style: TextStyle(fontFamily:"GoogleDisplay"),
+          style: TextStyle(fontFamily: "GoogleDisplay"),
         ),
         backgroundColor: Colors.black87,
         foregroundColor: Colors.amberAccent,
@@ -63,7 +63,9 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 12.0),
             TextField(
               controller: _passwordController,
-              style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255),),
+              style: const TextStyle(
+                color: Color.fromARGB(179, 255, 255, 255),
+              ),
               decoration: const InputDecoration(
                 labelText: 'Password',
                 labelStyle: TextStyle(color: Colors.amberAccent),
@@ -78,48 +80,48 @@ class _LoginPageState extends State<LoginPage> {
                     String username = _usernameController.text;
                     String password = _passwordController.text;
 
-                    // Cek kredensial
-                    // Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                    // Untuk menyambungkan Android emulator dengan Django pada localhost,
-                    // gunakan URL http://10.0.2.2/
-                    final response = await request.login("https://readify-d02-tk.pbp.cs.ui.ac.id/api/login/", {
-                      'username': username,
-                      'password': password,
-                    });
+                    // Check credentials
+                    final response = await request.login(
+                      "https://readify-d02-tk.pbp.cs.ui.ac.id/api/login/",
+                      {
+                        'username': username,
+                        'password': password,
+                      },
+                    );
 
                     if (request.loggedIn) {
                       String message = response['message'];
                       String uname = response['username'];
-                      if(context.mounted){
-
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const  MyHomePage()),
-                      );
-                      ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(
-                            SnackBar(content: Text("$message Selamat datang, $uname.")));
+                      if (context.mounted) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MyHomePage(),
+                          ),
+                        );
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(SnackBar(
+                            content: Text("$message Selamat datang, $uname."),
+                          ));
                       }
                     } else {
-                      if(context.mounted){
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('Login Gagal'),
-                          content:
-                          Text(response['message']),
-                          actions: [
-                            TextButton(
-                              child: const Text('OK'),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-
+                      if (context.mounted) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Login Gagal'),
+                            content: Text(response['message']),
+                            actions: [
+                              TextButton(
+                                child: const Text('OK'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
                       }
                     }
                   },
@@ -128,14 +130,16 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(width: 12.0),
                 ElevatedButton(
                   onPressed: () async {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const RegisterPage()),
-                      );
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterPage(),
+                      ),
+                    );
                   },
                   child: const Text('Register'),
                 ),
-              ]
+              ],
             ),
           ],
         ),
