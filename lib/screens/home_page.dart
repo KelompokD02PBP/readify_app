@@ -78,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String uname = ModalRoute.of(context)!.settings.arguments as String? ?? 'DefaultUser'; //ini beda
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -203,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisSpacing: 8.0, // Set the spacing between rows
                       ),
                       itemBuilder: (context, index) {
-                        return BookCard(item: snapshot.data[index]);
+                        return BookCard(item: snapshot.data[index], uname : uname);
                       },
                       physics: const ScrollPhysics(),
                     );

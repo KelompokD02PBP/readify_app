@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -106,6 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: const TextStyle(color: Color.fromARGB(179, 255, 255, 255))
                     );
 
+
                     _imagePicked = imagePicked;
                     setState(() {
                       imageName = nextText;
@@ -134,7 +134,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   String email = _emailController.text;
                   String address = _addressController.text;
                   List<http.MultipartFile> files = [];
-
 
                   final imagePicked = _imagePicked;
                   if (imagePicked != null) {

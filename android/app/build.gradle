@@ -51,6 +51,7 @@ android {
         versionName flutterVersionName
     }
 
+
     signingConfigs {
         release {
             storeFile file("../../release-keystore.jks")

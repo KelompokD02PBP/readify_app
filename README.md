@@ -31,5 +31,6 @@
 - Membuat Liked Books Page yang akan melakukan pemanggilan asynchronous ke aplikasi web projek tengah semester untuk mendapatkan semua buku yang disukai oleh user yang login.
 - Membuat Profile Page yang akan yang akan melakukan pemanggilan asynchronous ke aplikasi web projek tengah semester untuk mendapatkan informasi mengenai user yang di klik dan juga mengganti user profile dari user yang login.
 
+
 ## ➕ Menambahkan tautan berita acara ke README.md
 https://docs.google.com/spreadsheets/d/17tLofUkqANxrrpqmhahCtp9nIwHEO2CKPFto1tR3DNQ/edit?usp=sharing

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:readify_app/screens/home_page.dart';
+import 'package:readify_app/screens/likes_page.dart';
 import 'package:readify_app/screens/profile.dart';
 import '../classes/pbp_django_auth.dart';
 import '../screens/login.dart';
@@ -16,7 +17,7 @@ class EndDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.amberAccent,
+               color: Colors.amberAccent,
             ),
             child: Column(
               children: [
@@ -58,6 +59,20 @@ class EndDrawer extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => const MyHomePage(),
                   ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.favorite_border_sharp),
+            title: const Text('Disukai'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LikesPage(
+                      username:
+                          'kamu'), // Ganti 'jeje' dengan username yang sesuai
+                ),
+              );
             },
           ),
           ListTile(
