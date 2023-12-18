@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:readify_app/widgets/drawer.dart';
 import 'package:readify_app/widgets/carousel.dart';
 import 'dart:convert';
 
@@ -91,16 +92,16 @@ class _ProfilePageState extends State<ProfilePage> {
     final request = context.watch<CookieRequest>();
     debugPrint(request.jsonData.toString());
     return Scaffold(
-        backgroundColor: Colors.black,
         appBar: AppBar(
-          title: const Text('Profile'),
-          titleTextStyle: const TextStyle(
-            color: Color.fromRGBO(236, 190, 23, 1.0),
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+          title: const Text(
+            'Profile',
+            style: TextStyle(fontFamily: "GoogleDisplay"),
           ),
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.black87,
+          foregroundColor: Colors.amberAccent,
         ),
+        drawer: const EndDrawer(),
+        backgroundColor: const Color.fromARGB(255, 43, 39, 49),
         body: SingleChildScrollView(
           child: Center(
             child: Padding(
@@ -143,139 +144,138 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(height: 20),
                   isEditing
                       ? Form(
-                        key: _formKey,
-                        child:SingleChildScrollView(
-                          child: Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(children: [
-                            TextFormField(
-                              controller: _nameController,
-                              decoration: const InputDecoration(
-                                labelText: 'Username',
-                                labelStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                border: OutlineInputBorder(),
-                              ),
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              validator: (String?value){
-                                if(value==null||value.isEmpty){
-                                  return 'Username is required';
-                                }
-                                return null;
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                            TextFormField(
-                              controller: _passwordController,
-                              decoration: const InputDecoration(
-                                labelText: 'Password',
-                                labelStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                border: OutlineInputBorder(),
-                              ),
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              validator: (String? value){
-                                if(value==null||value.isEmpty){
-                                  return 'Password is required';
-                                }
-                                return null;
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                            TextFormField(
-                              controller: _addressController,
-                              decoration: const InputDecoration(
-                                labelText: 'Address',
-                                labelStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                border: OutlineInputBorder(),
-                              ),
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              validator: (String? value){
-                                if(value==null||value.isEmpty){
-                                  return 'Address is required';
-                                }
-                              
-                              
-
-                                return null;
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                            TextFormField(
-                              controller: _emailController,
-                              decoration: const InputDecoration(
-                                labelText: 'Email',
-                                labelStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                border: OutlineInputBorder(),
-                              ),
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              validator: (String? value){
-                                if(value==null||value.isEmpty){
-                                  return 'Email is required';
-                                }
-                                return null;
-                              },
-                            ),
-                            const SizedBox(height: 20),
-                            Column(
-                              children: [
-                                const Text(
-                                  "Profile image: ",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                const SizedBox(height: 10.0),
-                                imageName,
-                                const SizedBox(height: 10.0),
-                                ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                      Colors.white,
+                          key: _formKey,
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(children: [
+                                TextFormField(
+                                  controller: _nameController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Username',
+                                    labelStyle: TextStyle(
+                                      color: Colors.white,
                                     ),
-                                    foregroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                      Colors.black,
-                                    ),
+                                    border: OutlineInputBorder(),
                                   ),
-                                  onPressed: () async {
-                                    XFile? imagePicked = await _imagePicker
-                                        .pickImage(source: ImageSource.gallery);
-                                    if (imagePicked == null) return;
-
-                                    debugPrint(imagePicked.path);
-
-                                    Text nextText = Text(imagePicked.name,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ));
-
-                                    _imagePicked = imagePicked;
-                                    setState(() {
-                                      imageName = nextText;
-                                    });
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Username is required';
+                                    }
+                                    return null;
                                   },
-                                  child: const Text('Choose a picture'),
                                 ),
-                              ],
+                                const SizedBox(height: 10),
+                                TextFormField(
+                                  controller: _passwordController,
+                                  obscureText: true,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Password',
+                                    labelStyle: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Password is required';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(height: 10),
+                                TextFormField(
+                                  controller: _addressController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Address',
+                                    labelStyle: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Address is required';
+                                    }
+
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(height: 10),
+                                TextFormField(
+                                  controller: _emailController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Email',
+                                    labelStyle: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Email is required';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(height: 20),
+                                Column(
+                                  children: [
+                                    const Text(
+                                      "Profile image: ",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    const SizedBox(height: 10.0),
+                                    imageName,
+                                    const SizedBox(height: 10.0),
+                                    ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                          Colors.white,
+                                        ),
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                          Colors.black,
+                                        ),
+                                      ),
+                                      onPressed: () async {
+                                        XFile? imagePicked =
+                                            await _imagePicker.pickImage(
+                                                source: ImageSource.gallery);
+                                        if (imagePicked == null) return;
+
+                                        debugPrint(imagePicked.path);
+
+                                        Text nextText = Text(imagePicked.name,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            ));
+
+                                        _imagePicked = imagePicked;
+                                        setState(() {
+                                          imageName = nextText;
+                                        });
+                                      },
+                                      child: const Text('Choose a picture'),
+                                    ),
+                                  ],
+                                ),
+                              ]),
                             ),
-                          ]),
-                        ),
-                        )
-                      )
+                          ))
                       : Column(
                           children: [
                             Text(
@@ -374,7 +374,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                           files,
                         );
-                        print(response);
+                        // print(response);
                         setState(() {
                           isLoading = false;
                         });

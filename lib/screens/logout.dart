@@ -3,7 +3,6 @@ import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:readify_app/screens/login.dart';
 
-
 void main() {
   runApp(const LogoutApp());
 }
@@ -55,17 +54,22 @@ class _LogoutPageState extends State<LogoutPage> {
                 String message = response["message"];
                 if (response['status']) {
                   String uname = response["username"];
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("$message Sampai jumpa, $uname."),
-                  ));
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("$message Sampai jumpa, $uname."),
+                    ));
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
+                    );
+                  }
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("$message"),
-                  ));
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(message),
+                    ));
+                  }
                 }
               },
               child: const Text('Logout'),
