@@ -94,10 +94,10 @@ class _LoginPageState extends State<LoginPage> {
                         context,
                         MaterialPageRoute(builder: (context) => MyHomePage()),
                       );
-                      // ScaffoldMessenger.of(context)
-                      //   ..hideCurrentSnackBar()
-                      //   ..showSnackBar(
-                      //       SnackBar(content: Text("$message Selamat datang, $uname.")));
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                            SnackBar(content: Text("$message Selamat datang, $uname.")));
                     } else {
                       showDialog(
                         context: context,
