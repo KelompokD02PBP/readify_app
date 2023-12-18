@@ -17,8 +17,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool kDebugMode=false;
 
-  Future<List<Book>>? _books;
-  String? _dropdownValue;
+  var _books;
+  var _dropdownValue;
   String? _searching;
 
   _MyHomePageState(){
@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // melakukan decode response menjadi bentuk json
       var data = jsonDecode(utf8.decode(response.bodyBytes));
       if (kDebugMode) {
-        // print("\n response:$data");
+        print("\n response:$data");
       }
       
 

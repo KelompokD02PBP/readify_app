@@ -73,12 +73,11 @@ class _LoginPageState extends State<LoginPage> {
               obscureText: true,
             ),
             const SizedBox(height: 24.0),
-            Row(
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () async {
-                    String username = _usernameController.text;
-                    String password = _passwordController.text;
+            Row(children: <Widget>[
+              ElevatedButton(
+                onPressed: () async {
+                  String username = _usernameController.text;
+                  String password = _passwordController.text;
 
                     // Check credentials
                     final response = await request.login(
