@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:readify_app/widgets/book_card.dart';
-import 'package:readify_app/widgets/Drawer.dart';
+import 'package:readify_app/widgets/BookCard.dart';
+import 'package:readify_app/widgets/drawer.dart';
 import 'package:readify_app/models/Book2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -197,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   mainAxisSpacing: 8.0, // Set the spacing between rows
                                 ),
                                 itemBuilder: (context, index) {
-                                  return BookCard(item: snapshot.data[index], uname:uname);
+                                  return BookCard(item: snapshot.data[index]);
                                 },
                                 physics: const ScrollPhysics(),
                               );

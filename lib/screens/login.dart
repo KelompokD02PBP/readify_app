@@ -48,10 +48,28 @@ class _LoginPageState extends State<LoginPage> {
       ),
       backgroundColor: const Color.fromARGB(255, 43, 39, 49),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+              Image.network(
+              "assets/app-icon/Logo_Readify-Transparent.png",
+              width: 200,
+              height: 200, 
+            ),
+             const SizedBox(height: 20), 
+
+            // Text "Readify"
+            Text(
+              'Readify',
+              style: TextStyle(
+                color: Colors.amberAccent,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 40),
             TextField(
               controller: _usernameController,
               style: const TextStyle(color: Color.fromARGB(179, 255, 255, 255)),

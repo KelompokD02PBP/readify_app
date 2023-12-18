@@ -23,9 +23,9 @@ class BookCard extends StatelessWidget {
         Center(child:
           Column(
             children: [
-              // Expanded(child: 
-              // Image.network(imageUrl),
-              // ),
+              Expanded(child: 
+              Image.network(imageUrl),
+              ),
               Text(title,
                 style: const TextStyle(fontSize: 11, color: Colors.white70),
                 textAlign: TextAlign.center,
