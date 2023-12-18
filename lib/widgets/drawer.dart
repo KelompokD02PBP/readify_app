@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:readify_app/screens/HomePage.dart';
-import 'package:readify_app/screens/likes_page2.dart';
 import 'package:readify_app/screens/profile.dart';
 import '../classes/pbp_django_auth.dart';
 import '../screens/login.dart';
@@ -17,7 +16,7 @@ class EndDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-               color: Colors.amberAccent,
+              color: Colors.amberAccent,
             ),
             child: Column(
               children: [
@@ -62,18 +61,6 @@ class EndDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.favorite_border_sharp),
-            title: const Text('Disukai'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LikesPage(), // Ganti 'jeje' dengan username yang sesuai
-                ),
-              );
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             onTap: () async {
@@ -96,11 +83,10 @@ class EndDrawer extends StatelessWidget {
               } else {
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(message),
+                    content: Text("$message"),
                   ));
                 }
               }
-              
             },
           ),
         ],
