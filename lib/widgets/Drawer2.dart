@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:readify_app/screens/HomePage.dart';
 import 'package:readify_app/screens/likes_page2.dart';
 import 'package:readify_app/screens/profile.dart';
-import 'package:readify_app/screens/likes_page2.dart';
 import '../classes/pbp_django_auth.dart';
 import '../screens/login.dart';
 
@@ -78,6 +77,11 @@ class EndDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             onTap: () async {
+              /*
+              * Entah kenapa kadang ngebug bisa return ke homePage abis logout
+              * ini buat kosongin stack route  
+              */
+              Navigator.of(context).popUntil((route) => route.isFirst); 
               // Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
               final response = await request
                   .logout("https://readify-d02-tk.pbp.cs.ui.ac.id/api/logout/");

@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
     /*
     biar gk bisa rotate app
     */
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown
-    ]);
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown
+    // ]);
     return Provider(
       create: (_) {
         CookieRequest request = CookieRequest();
