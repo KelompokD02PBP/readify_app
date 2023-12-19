@@ -7,6 +7,7 @@ import '../classes/pbp_django_auth.dart';
 import '../screens/login.dart';
 
 class EndDrawer extends StatelessWidget {
+  
   const EndDrawer({super.key});
 
   @override
