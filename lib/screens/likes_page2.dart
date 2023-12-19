@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:readify_app/models/Book2.dart';
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:readify_app/screens/detail_book.dart';
+import 'package:flutter/services.dart';
 
 class LikesPage extends StatefulWidget {
   const LikesPage({super.key});
@@ -34,6 +35,14 @@ class _MyWidgetState extends State<LikesPage> {
 
   @override
   Widget build(BuildContext context) {
+    /*
+    biar gk bisa rotate app
+    */
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
+    final request = context.read<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -66,6 +75,17 @@ class _MyWidgetState extends State<LikesPage> {
                         title: Text("Title: ${snapshot.data![index].fields.title}"),
                         subtitle:
                             Text('Author: ${snapshot.data![index].fields.author}'),
+                        onTap:(){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BookDetail(
+                                book : snapshot.data![index],
+                                uname: ModalRoute.of(context)!.settings.arguments as String? ?? 'DefaultUser',
+                              ),
+                            ),
+                          );
+                        }
                       ),
                     ],
                   ),

@@ -60,7 +60,7 @@ class BookCard extends StatelessWidget {
                     //   ..hideCurrentSnackBar()
                     //   ..showSnackBar(SnackBar(
                     //     content: Text("Kamu telah menekan tombol ${item.fields.title}!")));
-                        Navigator.pushReplacement(
+                        Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => PerBook(book:item),

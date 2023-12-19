@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
+
 class PerBook extends StatefulWidget {
   final Book book;
   const PerBook({super.key, required this.book});
@@ -126,7 +127,6 @@ class _PerBookState extends State<PerBook> {
 
   @override
   Widget build(BuildContext context) {
-
     String imageUrl = widget.book.fields.imageUrlM;
     imageUrl = imageUrl.replaceAll("http://", "https://").replaceAll("images.amazon", "m.media-amazon");
     return Scaffold(
