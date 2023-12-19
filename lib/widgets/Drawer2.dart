@@ -75,18 +75,6 @@ class EndDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.favorite_border_sharp),
-            title: const Text('Disukai'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LikesPage(), // Ganti 'jeje' dengan username yang sesuai
-                ),
-              );
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             onTap: () async {

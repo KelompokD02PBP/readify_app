@@ -62,7 +62,7 @@ class _MyWidgetState extends State<LikesPage> {
                       ListTile(
                         contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                         leading:
-                            Image.network(snapshot.data![index].fields.imageUrlL),
+                            Image.network(snapshot.data![index].fields.imageUrlL.replaceAll("http://", "https://").replaceAll("images.amazon", "m.media-amazon")),
                         title: Text("Title: ${snapshot.data![index].fields.title}"),
                         subtitle:
                             Text('Author: ${snapshot.data![index].fields.author}'),

@@ -88,7 +88,7 @@ class _CarouselState extends State<Carousel> {
       margin: EdgeInsets.all(margin),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(imageUrl),
+          image: NetworkImage(imageUrl.replaceAll("http://", "https://").replaceAll("images.amazon", "m.media-amazon")),
           fit: BoxFit.cover, 
         ),
       ),

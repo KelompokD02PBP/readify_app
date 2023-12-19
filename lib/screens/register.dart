@@ -134,14 +134,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   String address = _addressController.text;
                   List<http.MultipartFile> files = [];
 
-<<<<<<< HEAD
-                  final imagePicked = _imagePicked;
-                  if (imagePicked != null) {
-                    files.add(http.MultipartFile.fromBytes(
-                      "profile_picture",
-                      await imagePicked.readAsBytes(),
-                      contentType: MediaType.parse(imagePicked.mimeType!),
-=======
 
                   final imagePicked = _imagePicked;
                   if (imagePicked != null) {
@@ -158,7 +150,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       "profile_picture",
                       await imagePicked.readAsBytes(),
                       // contentType: MediaType.parse(imagePicked.mimeType!),
->>>>>>> 2f8dbbe85176f7bbb654e921b8315e3d44e04ff8
                       filename: imagePicked.name,
                     ));
                   }

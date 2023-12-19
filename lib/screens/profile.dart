@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:readify_app/widgets/drawer.dart';
+import 'package:readify_app/widgets/Drawer2.dart';
 import 'package:readify_app/widgets/carousel.dart';
 import 'dart:convert';
 
@@ -357,7 +357,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           files.add(http.MultipartFile.fromBytes(
                             "profile_picture",
                             await imagePicked.readAsBytes(),
-                            // contentType: MediaType.parse(imagePicked.mimeType!),
+                            contentType: MediaType.parse(imagePicked.mimeType!),
                             filename: imagePicked.name,
                           ));
                         }
@@ -387,8 +387,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             userPassword = response["profile"]["password"];
                             userProfileImage =
                                 response["profile"]["profile_picture"];
-                            if (response["profile"]["pp_exist"] == false ||
-                                response["profile"]["pp_exist"] == null) {
+                            if (response["profile"]["pp_exist"] == false) {
                               userProfileImage = 'assets/images/anon.png';
                             } else {
                               userProfileImage =

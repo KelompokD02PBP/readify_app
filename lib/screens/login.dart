@@ -53,12 +53,13 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-              Image.network(
-              "assets/app-icon/Logo_Readify-Transparent.png",
-              width: 200,
-              height: 200, 
-            ),
-             const SizedBox(height: 20), 
+            //   Image.network(
+            //   "assets/app-icon/Logo_Readify-Transparent.png",
+            //   width: 200,
+            //   height: 200, 
+            // ),
+            Image(image: AssetImage('assets/app-icon/Logo_Readify-Transparent.png'), width: 200, height: 200,),
+            const SizedBox(height: 20), 
 
             // Text "Readify"
             Text(
