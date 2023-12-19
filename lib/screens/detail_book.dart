@@ -56,18 +56,14 @@ class _BookDetailState extends State<BookDetail> {
   Future<void> checkIsLike() async{
     var doesLike = await fetchIsLike();
     if(doesLike==1){
-      print("prior like");
       isLiked=true;
     }else{
-      print("prior dislike");
       isLiked=false;
     }
   }
 
   Future<int> fetchIsLike() async{
     final request = context.read<CookieRequest>();
-    print("idBook ${widget.book.pk}");
-    print("idUser ${ request.jsonData["id"]}");
     final response = await request.postJson(
         "https://readify-d02-tk.pbp.cs.ui.ac.id/like-dislike-flutter/",
         jsonEncode({
@@ -99,7 +95,7 @@ class _BookDetailState extends State<BookDetail> {
             // Kolom pertama (gambar cover)
             Expanded(
               child: Image.network(
-                widget.book.fields.imageUrlL,
+                widget.book.fields.imageUrlL.replaceAll("http://", "https://").replaceAll("images.amazon", "m.media-amazon"),
                 fit: BoxFit.contain,
               ),
             ),
@@ -175,7 +171,7 @@ class _BookDetailState extends State<BookDetail> {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            'Sukai buku ini',
+                            'Like',
                             style: TextStyle(
                               color:
                                   isLiked ? Colors.white : Colors.amberAccent,
@@ -219,11 +215,15 @@ class _BookDetailState extends State<BookDetail> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text("${_comments[index].fields.name}", style: TextStyle(color: Color.fromARGB(179, 255, 255, 255), fontWeight: FontWeight.bold),),
-                                      Text("${_comments[index].fields.createdOn}", style: TextStyle(color: Color.fromARGB(179, 255, 255, 255),fontSize: 10),),
-                                    ],
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child:
+                                    Wrap(
+                                      children: [
+                                        Text("${_comments[index].fields.name}", style: TextStyle(color: Color.fromARGB(179, 255, 255, 255), fontWeight: FontWeight.bold),),
+                                        Text("${_comments[index].fields.createdOn.toString().substring(0,10)}", style: TextStyle(color: Color.fromARGB(179, 255, 255, 255),fontSize: 10),),
+                                      ],
+                                    ),
                                   ),
                                   Text(_comments[index].fields.comment, style: TextStyle(color: Color.fromARGB(179, 255, 255, 255),),),
                                 ],
@@ -265,7 +265,6 @@ Future<void> getComments() async{
         }),
       );
       c.fields.name=response2["username"][0];
-      print(c.fields.name);
     }
   }
 
