@@ -79,6 +79,7 @@ class EndDrawer extends StatelessWidget {
             onTap: () async {
               /*
               * Entah kenapa kadang ngebug bisa return ke homePage abis logout
+              * ini buat kosongin stack route  
               */
               Navigator.of(context).popUntil((route) => route.isFirst); 
               // Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
