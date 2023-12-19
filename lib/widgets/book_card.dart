@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readify_app/screens/detail_book.dart';
+import 'package:readify_app/screens/per_book.dart';
 import 'package:readify_app/models/Book2.dart';
 
 class BookCard extends StatelessWidget {
@@ -59,10 +60,11 @@ class BookCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BookDetail(
-                          book : item,
-                          uname: uname,
-                        ),
+                        // builder: (context) => BookDetail(
+                        //   book : item,
+                        //   uname: uname,
+                        // ),
+                        builder: (context) => PerBook(book:item)
                       ),
                     );
 

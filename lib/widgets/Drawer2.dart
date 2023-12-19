@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:readify_app/screens/HomePage.dart';
 import 'package:readify_app/screens/likes_page2.dart';
 import 'package:readify_app/screens/profile.dart';
-import 'package:readify_app/screens/likes_page2.dart';
 import '../classes/pbp_django_auth.dart';
 import '../screens/login.dart';
 
