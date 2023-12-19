@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:readify_app/models/book.dart';
+import 'package:readify_app/models/Book2.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({
@@ -88,7 +88,7 @@ class _CarouselState extends State<Carousel> {
       margin: EdgeInsets.all(margin),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(imageUrl),
+          image: NetworkImage(imageUrl.replaceAll("http://", "https://").replaceAll("images.amazon", "m.media-amazon")),
           fit: BoxFit.cover, 
         ),
       ),

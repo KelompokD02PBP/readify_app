@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:readify_app/widgets/book_card.dart';
-import 'package:readify_app/widgets/drawer.dart';
-import 'package:readify_app/models/book.dart';
+import 'package:readify_app/widgets/Drawer2.dart';
+import 'package:readify_app/models/Book2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -14,23 +14,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool kDebugMode = false;
 
-  Future<List<Book>>? _books;
-  String? _dropdownValue;
+  bool kDebugMode=false;
+
+  var _books;
+  var _dropdownValue;
   String? _searching;
 
-  _MyHomePageState() {
-    _books = fetchProduct();
+  _MyHomePageState(){
+    _books=fetchProduct();
   }
 
-  void dropdownCallback(Object? selectedValue) async {
-    if (selectedValue is String) {
+  void dropdownCallback(Object? selectedValue) async{
+    if(selectedValue is String){
+
       _searching ??= "";
 
       final response = await http.post(
-        Uri.parse(
-            'https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/sort-books-json/$_searching'),
+        Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/sort-books-json/$_searching'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -43,9 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
       List<Book> listProduct = [];
       for (var d in data) {
-        if (d != null) {
-          listProduct.add(Book.fromJson(d));
-        }
+          if (d != null) {
+              listProduct.add(Book.fromJson(d));
+          }
       }
       setState(() {
         _books = Future<List<Book>>.value(listProduct);
@@ -55,165 +56,162 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<List<Book>> fetchProduct() async {
-    var url = Uri.parse(
-        'https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/get-books-json');
-    var response =
-        await http.get(url, headers: {"Content-Type": "application/json"});
+      var url = Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/get-books-json');
+      var response = await http.get(url, headers: {"Content-Type": "application/json"});
 
-    // melakukan decode response menjadi bentuk json
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
-    if (kDebugMode) {
-      // print("\n response:$data");
-    }
-
-    // melakukan konversi data json menjadi object Product
-    List<Book> listProduct = [];
-    for (var d in data) {
-      if (d != null) {
-        listProduct.add(Book.fromJson(d));
+      // melakukan decode response menjadi bentuk json
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+      if (kDebugMode) {
+        print("\n response:$data");
       }
+
+
+      // melakukan konversi data json menjadi object Product
+      List<Book> listProduct = [];
+      for (var d in data) {
+          if (d != null) {
+              listProduct.add(Book.fromJson(d));
+          }
+      }
+      return listProduct;
     }
-    return listProduct;
-  }
 
   @override
   Widget build(BuildContext context) {
-    String uname = ModalRoute.of(context)!.settings.arguments as String? ?? 'DefaultUser'; //ini beda
+    String uname = ModalRoute.of(context)!.settings.arguments as String? ?? 'DefaultUser';
     return Scaffold(
         appBar: AppBar(
           title: const Text(
             'Readify',
-            style: TextStyle(fontFamily: "GoogleDisplay"),
+            style: TextStyle(fontFamily:"GoogleDisplay"),
           ),
           backgroundColor: Colors.black87,
           foregroundColor: Colors.amberAccent,
         ),
         backgroundColor: const Color.fromARGB(255, 43, 39, 49),
         drawer: const EndDrawer(),
-        body: ListView(children: [
-          Wrap(
-              runSpacing: 1.0,
-              spacing: 8.0,
-              // alignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                SizedBox(
-                    width: 600,
-                    height: 70,
-                    child: TextField(
-                      autocorrect: true,
-                      style: const TextStyle(
-                        color: Color.fromARGB(179, 255, 255, 255),
-                      ),
-                      decoration: const InputDecoration(
-                        hintStyle: TextStyle(
-                          color: Color.fromARGB(97, 255, 255, 255),
+        body:
+        ListView(
+          children : [
+            Wrap(
+                  runSpacing:1.0,
+                  spacing: 8.0,
+                  // alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children:[
+                    SizedBox(
+                      width: 600,
+                      height: 70,
+                      child:
+                      TextField(
+                        autocorrect: true,
+                        style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255),),
+                        decoration: const InputDecoration(
+                          hintStyle: TextStyle(color: Color.fromARGB(97, 255, 255, 255),),
+                          hintText: "Lorem Ipsum",
+                          labelText: "Search",
+                          labelStyle: TextStyle(color: Colors.amberAccent),
                         ),
-                        hintText: "Lorem Ipsum",
-                        labelText: "Search",
-                        labelStyle: TextStyle(color: Colors.amberAccent),
-                      ),
-                      onChanged: (String? values) {
-                        setState(() {
+                        onChanged: (String? values){
+                          setState(() {
                           _searching = values!;
                         });
                       },
-                    )),
-                ElevatedButton(
-                    onPressed: () async {
-                      // print(_searching.toString());
-
-                      _searching ??= "";
-
-                      var searchedBooks = await http.get(
-                          Uri.parse(
-                              'https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/search-books-json/$_searching'),
-                          headers: {"Content-Type": "application/json"});
-                      var data =
-                          jsonDecode(utf8.decode(searchedBooks.bodyBytes));
-                      // print(searchedBooks);
-
-                      List<Book> listProduct = [];
-                      for (var d in data) {
-                        if (d != null) {
-                          listProduct.add(Book.fromJson(d));
-                        }
-                      }
-                      setState(() {
-                        _books = Future<List<Book>>.value(listProduct);
-                        _dropdownValue = "1";
-                      });
-                    },
-                    child: const Text("Search")),
-                Row(children: [
-                  DropdownButton(
-                    iconEnabledColor: Colors.amber,
-                    items: const [
-                      DropdownMenuItem<String>(value: "1", child: Text("A-Z")),
-                      DropdownMenuItem<String>(value: "2", child: Text("Z-A")),
-                      DropdownMenuItem<String>(
-                          value: "3", child: Text("First Published")),
-                      DropdownMenuItem<String>(
-                          value: "4", child: Text("Last Published")),
-                      DropdownMenuItem<String>(
-                          value: "5", child: Text("Before 2000")),
-                      DropdownMenuItem<String>(
-                          value: "6", child: Text("After 2000")),
-                    ],
-                    onChanged: dropdownCallback,
-                    value: _dropdownValue,
-                    icon: const Icon(Icons.sort),
-                    hint: const Text(
-                      "Sort",
-                      style: TextStyle(color: Colors.amber),
+                    )
                     ),
-                    style: const TextStyle(
-                        color: Color.fromARGB(179, 255, 255, 255)),
-                    dropdownColor: Colors.orangeAccent,
-                  )
-                ])
-              ]),
-          FutureBuilder(
+                    ElevatedButton(
+                                onPressed: () async{
+                                  // print(_searching.toString());
+
+                                  _searching ??= "";
+
+                                  var searchedBooks = await http.get(Uri.parse('https://readify-d02-tk.pbp.cs.ui.ac.id/katalog/search-books-json/$_searching'),headers: {"Content-Type": "application/json"});
+                                  var data = jsonDecode(utf8.decode(searchedBooks.bodyBytes));
+                                  // print(searchedBooks);
+
+                                  List<Book> list_product = [];
+                                  for (var d in data) {
+                                      if (d != null) {
+                                          list_product.add(Book.fromJson(d));
+                                      }
+                                  }
+                                  setState(() {
+                                    _books = Future<List<Book>>.value(list_product);
+                                    _dropdownValue="1";
+                                  });
+                                },
+                                child: const Text("Search")
+                            ),
+                        Row(
+                          children: [
+
+                            DropdownButton(
+                              iconEnabledColor: Colors.amber,
+                              items: const [
+                                DropdownMenuItem<String>(value:"1", child: Text("A-Z")),
+                                DropdownMenuItem<String>(value:"2", child: Text("Z-A")),
+                                DropdownMenuItem<String>(value:"3", child: Text("First Published")),
+                                DropdownMenuItem<String>(value:"4", child: Text("Last Published")),
+                                DropdownMenuItem<String>(value: "5",child: Text("Before 2000")),
+                                DropdownMenuItem<String>(value: "6",child: Text("After 2000")),
+                              ],
+                              onChanged: dropdownCallback,
+                              value:_dropdownValue,
+                              icon: const Icon(Icons.sort),
+                              hint: const Text("Sort", style: TextStyle(color: Colors.amber),),
+                              style:const TextStyle(color: Color.fromARGB(179, 255, 255, 255)),
+                              dropdownColor: Colors.orangeAccent,
+                            )
+                          ]
+                        )
+
+                  ]
+            ),
+              FutureBuilder(
               future: _books,
-              builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  if (!snapshot.hasData) {
-                    return const Column(
-                      children: [
-                        Text(
-                          "Tidak ada data produk.",
-                          style:
-                              TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                        ),
-                        SizedBox(height: 8),
-                      ],
-                    );
-                  } else {
-                    return GridView.builder(
-                      itemCount: snapshot.data.length,
-                      shrinkWrap: true,
-                      // gridDelegate: CustomGridDelegate(dimension: 170.0),
-                      gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent:
-                            200.0, // Set the maximum width of each item
-                        crossAxisSpacing:
-                            8.0, // Set the spacing between columns
-                        mainAxisSpacing: 8.0, // Set the spacing between rows
-                      ),
-                      itemBuilder: (context, index) {
-                        return BookCard(item: snapshot.data[index], uname : uname);
-                      },
-                      physics: const ScrollPhysics(),
-                    );
-                  }
-                }
-              })
-        ]));
+              builder: (context, AsyncSnapshot snapshot){
+                      if (snapshot.data == null) {
+                          return const Center(child: CircularProgressIndicator());
+                      }
+                      else {
+                          if (!snapshot.hasData) {
+                            return const Column(
+                              children: [
+                              Text(
+                                  "Tidak ada data produk.",
+                                  style:
+                                      TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                              ),
+                              SizedBox(height: 8),
+                              ],
+                            );
+                          }
+                          else {
+                              return GridView.builder(
+                                itemCount: snapshot.data.length,
+                                shrinkWrap: true,
+                                // gridDelegate: CustomGridDelegate(dimension: 170.0),
+                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 200.0, // Set the maximum width of each item
+                                  crossAxisSpacing: 8.0, // Set the spacing between columns
+                                  mainAxisSpacing: 8.0, // Set the spacing between rows
+                                ),
+                                itemBuilder: (context, index) {
+                                  return BookCard(item: snapshot.data[index], uname:uname);
+                                },
+                                physics: const ScrollPhysics(),
+                              );
+                          }
+                      }
+              }
+              )
+
+          ]
+        )
+      );
   }
 }
+
 
 class CustomGridDelegate extends SliverGridDelegate {
   CustomGridDelegate({required this.dimension});

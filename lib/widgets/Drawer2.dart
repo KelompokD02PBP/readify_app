@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:readify_app/screens/home_page.dart';
-import 'package:readify_app/screens/likes_page.dart';
+import 'package:readify_app/screens/HomePage.dart';
+import 'package:readify_app/screens/likes_page2.dart';
 import 'package:readify_app/screens/profile.dart';
+import 'package:readify_app/screens/likes_page2.dart';
 import '../classes/pbp_django_auth.dart';
 import '../screens/login.dart';
 
@@ -68,9 +69,7 @@ class EndDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LikesPage(
-                      username:
-                          'kamu'), // Ganti 'jeje' dengan username yang sesuai
+                  builder: (context) => LikesPage(), // Ganti 'jeje' dengan username yang sesuai
                 ),
               );
             },
@@ -104,7 +103,7 @@ class EndDrawer extends StatelessWidget {
               }
               
             },
-          ),
+          )
         ],
       ),
     );
