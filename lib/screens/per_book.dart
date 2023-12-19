@@ -273,6 +273,7 @@ class _PerBookState extends State<PerBook> {
                   ? const Center(child: CircularProgressIndicator())
                   : ListView.builder(
                       shrinkWrap: true,
+                      physics: const ScrollPhysics(),
                       itemCount: _comments.length,
                       itemBuilder: (context, index) {
                         String formattedDate =
