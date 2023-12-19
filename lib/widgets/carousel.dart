@@ -89,7 +89,7 @@ class _CarouselState extends State<Carousel> {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(imageUrl),
-          fit: BoxFit.cover, // Ensure the image covers the entire container
+          fit: BoxFit.cover, 
         ),
       ),
     );

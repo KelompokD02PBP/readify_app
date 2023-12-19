@@ -26,7 +26,7 @@ class LogoutPage extends StatefulWidget {
   const LogoutPage({super.key});
 
   @override
-  _LogoutPageState createState() => _LogoutPageState();
+  State<LogoutPage> createState() => _LogoutPageState();
 }
 
 class _LogoutPageState extends State<LogoutPage> {
@@ -49,7 +49,8 @@ class _LogoutPageState extends State<LogoutPage> {
             ElevatedButton(
               onPressed: () async {
                 // Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                final response = await request.logout("https://readify-d02-tk.pbp.cs.ui.ac.id/api/logout/");
+                final response = await request.logout(
+                    "https://readify-d02-tk.pbp.cs.ui.ac.id/api/logout/");
 
                 String message = response["message"];
                 if (response['status']) {

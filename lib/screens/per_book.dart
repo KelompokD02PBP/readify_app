@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readify_app/models/Book2.dart';
 import 'package:readify_app/models/Comment.dart';
-import 'package:readify_app/widgets/Drawer.dart';
+import 'package:readify_app/widgets/Drawer2.dart';
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'dart:convert';
 import 'package:provider/provider.dart';

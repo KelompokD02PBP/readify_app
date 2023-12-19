@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -92,10 +94,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 ElevatedButton(
                   onPressed: () async {
                     XFile? imagePicked = await _imagePicker.pickImage(
-                        source: ImageSource.gallery);
+                        source: ImageSource.gallery
+                    );
                     if (imagePicked == null) return;
 
                     debugPrint(imagePicked.path);
+                    debugPrint(imagePicked.mimeType);
 
                     Text nextText = Text(imagePicked.name,
                         style: const TextStyle(
@@ -130,12 +134,31 @@ class _RegisterPageState extends State<RegisterPage> {
                   String address = _addressController.text;
                   List<http.MultipartFile> files = [];
 
+<<<<<<< HEAD
                   final imagePicked = _imagePicked;
                   if (imagePicked != null) {
                     files.add(http.MultipartFile.fromBytes(
                       "profile_picture",
                       await imagePicked.readAsBytes(),
                       contentType: MediaType.parse(imagePicked.mimeType!),
+=======
+
+                  final imagePicked = _imagePicked;
+                  if (imagePicked != null) {
+                    // http.MultipartFile imageFile = await http.MultipartFile.fromPath(
+                    //   "profile_picture",
+                    //   imagePicked.path,
+                    //   //contentType: MediaType.parse(imagePicked.mimeType!),
+                    //   filename: imagePicked.name,
+                    // );
+                    // debugPrint(imageFile.contentType.toString());
+                    // files.add(imageFile);
+
+                    files.add(http.MultipartFile.fromBytes(
+                      "profile_picture",
+                      await imagePicked.readAsBytes(),
+                      // contentType: MediaType.parse(imagePicked.mimeType!),
+>>>>>>> 2f8dbbe85176f7bbb654e921b8315e3d44e04ff8
                       filename: imagePicked.name,
                     ));
                   }

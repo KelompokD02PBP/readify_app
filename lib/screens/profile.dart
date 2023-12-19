@@ -357,7 +357,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           files.add(http.MultipartFile.fromBytes(
                             "profile_picture",
                             await imagePicked.readAsBytes(),
-                            contentType: MediaType.parse(imagePicked.mimeType!),
+                            // contentType: MediaType.parse(imagePicked.mimeType!),
                             filename: imagePicked.name,
                           ));
                         }
@@ -387,7 +387,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             userPassword = response["profile"]["password"];
                             userProfileImage =
                                 response["profile"]["profile_picture"];
-                            if (response["profile"]["pp_exist"] == false) {
+                            if (response["profile"]["pp_exist"] == false ||
+                                response["profile"]["pp_exist"] == null) {
                               userProfileImage = 'assets/images/anon.png';
                             } else {
                               userProfileImage =
