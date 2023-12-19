@@ -77,6 +77,10 @@ class EndDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             onTap: () async {
+              /*
+              * Entah kenapa kadang ngebug bisa return ke homePage abis logout
+              */
+              Navigator.of(context).popUntil((route) => route.isFirst); 
               // Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
               final response = await request
                   .logout("https://readify-d02-tk.pbp.cs.ui.ac.id/api/logout/");
