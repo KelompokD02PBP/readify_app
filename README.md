@@ -1,4 +1,13 @@
 # 📱 Readify Mobile App
+#### This app is android only.
+
+Build status:
+[![AppCenter build status](https://build.appcenter.ms/v0.1/apps/5d54a6a1-a1b1-479c-a605-f9a19a64fab6/branches/main/badge)](https://appcenter.ms)
+![Github release build status](https://github.com/KelompokD02PBP/readify_app/actions/workflows/release.yml/badge.svg)
+
+Download the application from:
+- [Microsoft App Center](https://ristek.link/readify)
+- [GitHub](https://github.com/KelompokD02PBP/readify_app/releases)
 
 ## Aplikasi Tugas Akhir PBP kelompok D02
 
