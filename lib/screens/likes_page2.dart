@@ -73,10 +73,6 @@ class _MyWidgetState extends State<LikesPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              // builder: (context) => BookDetail(
-                              //   book : snapshot.data![index],
-                              //   uname: ModalRoute.of(context)!.settings.arguments as String? ?? 'DefaultUser',
-                              // ),
                               builder: (context) => PerBook(book:snapshot.data![index])
                             ),
                           );
