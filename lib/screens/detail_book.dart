@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:readify_app/models/Book2.dart';
 import 'package:readify_app/models/user.dart';
-import 'package:readify_app/models/Comment.dart';
+import 'package:readify_app/models/comment2.dart';
 import 'package:readify_app/classes/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
