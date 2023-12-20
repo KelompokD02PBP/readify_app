@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:readify_app/screens/login.dart';
-import 'package:http_parser/http_parser.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -104,7 +103,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         imagePicked.name,
                         style: const TextStyle(color: Color.fromARGB(179, 255, 255, 255))
                     );
-
 
                     _imagePicked = imagePicked;
                     setState(() {

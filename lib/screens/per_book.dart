@@ -43,7 +43,6 @@ class _PerBookState extends State<PerBook> {
           "https://readify-d02-tk.pbp.cs.ui.ac.id/get-comment-flutter/${widget.book.pk}"),
     );
     var data = jsonDecode(utf8.decode(response.bodyBytes));
-    print("comment$data");
     _comments = [];
     for (var d in data) {
       if (d != null) {

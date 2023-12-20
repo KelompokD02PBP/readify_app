@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:readify_app/screens/detail_book.dart';
 import 'package:readify_app/screens/per_book.dart';
 import 'package:readify_app/models/Book2.dart';
 
@@ -58,15 +57,11 @@ class BookCard extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        // builder: (context) => BookDetail(
-                        //   book : item,
-                        //   uname: uname,
-                        // ),
-                        builder: (context) => PerBook(book:item)
-                      ),
-                    );
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PerBook(book:item)
+                            ),
+                          );
 
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()
@@ -99,7 +94,6 @@ class BookCard extends StatelessWidget {
     //           )
     //           );
     //     },
-
     //     borderRadius: BorderRadius.circular(12),
     //     child: Container(
     //       // Container untuk menyimpan Icon dan Text
